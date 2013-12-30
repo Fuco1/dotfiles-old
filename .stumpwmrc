@@ -1,0 +1,42 @@
+;;; -*- lisp -*-
+
+(in-package :stumpwm)
+
+(message "Loading rc!")
+(run-shell-command "xrandr --output VGA-1 --auto --left-of LVDS-1 --output LVDS-1 --auto")
+(run-shell-command "xmodmap -e \"pointer = 3 2 1\"")
+
+;; launch Emacs
+(defcommand emacs () ()  ;! redefining emacs command
+  "Start Emacs or switch to it, if it is already running."
+  (run-or-raise "emacs" '(:class "Emacs")))
+
+;; launch Web browser
+(defcommand firefox () ()
+  "Start Firefox or switch to it, if it is already running."
+  (run-or-raise "firefox" '(:class "Firefox")))
+;; (define-key *root-map* (kbd "f") "firefox")
+
+;; replace the xterm command
+(defcommand urxvtc () ()
+  "Start an urxvtc instance"
+  (run-shell-command "urxvtc"))
+(define-key *root-map* (kbd "c") "urxvtc")
+
+;;; appearance
+;; width in pixels given to the borders of windows with maxsize or ratio
+;; hints
+(setf *maxsize-border-width* 1)
+
+;; width in pixels given to the borders of transient or pop-up windows
+(setf *transient-border-width* 1)
+
+;; width in pixels given to the borders of regular windows
+(setf *normal-border-width* 1)
+
+;; set the border color for focused windows
+(set-focus-color "palegreen3")  ; `white' by default
+;;(set-unfocus-color "palegreen3")
+
+;; input focus is transferred to the window you click on
+(setf *mouse-focus-policy* :click)

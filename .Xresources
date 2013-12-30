@@ -1,0 +1,99 @@
+!# flash on bell
+URxvt.urgentOnBell: true
+
+!# borderless and no scrollbar
+URxvt*scrollBar_right: false
+URxvt*scrollBar: false
+URxvt*borderLess: false
+
+!# teh transparency stuff
+! Rxvt*inheritPixmap: true
+! URxvt*tintColor: white
+! URxvt*shading: 20
+
+!# clickable links
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt.perl-ext: default,matcher
+URxvt.url-launcher: opera
+URxvt.matcher.button: 3
+
+! scrollback buffer lines - 65535 is max on most machines (64 is default)
+URxvt*saveLines: 12000
+
+! scrollbar position - left=false (default) or right=true
+! URxvt*scrollBar_right: true
+
+URxvt.letterSpace: -1
+
+! xft:Inconsolata:pixelsize=14:antialias=true:hinting=true
+URxvt*font: xft:Monospace:pixelsize=14:antialias=true:hinting=true
+URxvt*boldFont: xft:Monospace:pixelsize=14:antialias=true:hinting=true
+
+! set color depth
+URxvt*depth: 32
+
+! font color (default is black)
+! URxvt*foreground: gray86
+
+! background color (prior to tinting) (default is white)
+! URxvt.background: gray4
+
+urxvt*foreground: #bbbbbb
+urxvt*background: [72]#050505
+
+! 187 = BB; 255 = FF; 85 = 55;
+
+!"Colour0"="187,187,187" # fg
+!"Colour1"="255,255,255" # bold fg
+!"Colour2"="5,5,5"       # bg
+!"Colour3"="85,85,85"    # bold bg
+!"Colour4"="0,0,0"       # cursor text
+!"Colour5"="0,255,0"     # cursor color
+
+! Normal
+! color0    black
+! color1    red
+! color2    green
+! color3    yellow
+! color4    blue
+! color5    purple
+! color6    cyan
+! color7    white
+
+!"Colour7"="85,85,85"    # black bold
+!"Colour9"="255,85,85"   # red bold
+!"Colour11"="85,255,85"  # green bold
+!"Colour13"="255,255,85" # yellow bold
+!"Colour15"="85,85,255"  # blue bold
+!"Colour17"="255,85,255" # magenta bold
+!"Colour19"="85,255,255" # cyan bold
+!"Colour21"="255,255,255" # white bold
+
+urxvt*color0:    #000000
+urxvt*color1:    #bb0000
+urxvt*color2:    #00bb00
+urxvt*color3:    #bbbb00
+urxvt*color4:    #0000bb
+urxvt*color5:    #bb00bb
+urxvt*color6:    #00bbbb
+urxvt*color7:    #bbbbbb
+
+! light versions
+
+!"Colour6"="0,0,0"       # black
+!"Colour8"="187,0,0"     # red
+!"Colour10"="0,187,0"    # green
+!"Colour12"="187,187,0"  # yellow
+!"Colour14"="0,0,187"    # blue
+!"Colour16"="187,0,187"  # magenta
+!"Colour18"="0,187,187"  # cyan
+!"Colour20"="187,187,187" # white
+
+urxvt*color8:    #555555
+urxvt*color9:    #ff5555
+urxvt*color10:    #55ff55
+urxvt*color11:    #ffff55
+urxvt*color12:    #5555ff
+urxvt*color13:    #ff55ff
+urxvt*color14:    #55ffff
+urxvt*color15:    #ffffff
