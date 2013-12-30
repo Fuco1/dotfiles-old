@@ -6,8 +6,8 @@ xmodmap ~/.xmodmap
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
-su matus -c "/usr/bin/udisks --mount /dev/sdb1"
-su matus -c "/usr/bin/udisks --mount /dev/sdb2"
+/usr/bin/udisks --mount /dev/sda1
+/usr/bin/udisks --mount /dev/sda2
 
 # start urxvt daemon
 urxvtc
