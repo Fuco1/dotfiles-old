@@ -71,7 +71,7 @@ main = do
                 (
                   [
                   ((mod2Mask, xK_c), kill)
-                , ((mod2Mask, xK_p), spawn "exe=`dmenu_path | dmenu -b -nf '#888888' -nb '#222222' -sf '#ffffff' -sb '#285577'` && exec $exe")
+                , ((mod2Mask, xK_p), spawn "dmenu_run -p 'Run> ' -b -nf '#888a85' -nb '#2e3436' -sf '#eeeeec' -sb '#3465a4'")
                 , ((mod2Mask, xK_period), screenWorkspace 0 >>= flip whenJust (windows . W.view))
                 , ((mod2Mask, xK_comma), screenWorkspace 1 >>= flip whenJust (windows . W.view))
                 , ((mod2Mask .|. shiftMask, xK_period), screenWorkspace 0 >>=
