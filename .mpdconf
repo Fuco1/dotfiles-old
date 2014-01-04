@@ -4,7 +4,7 @@ music_directory    "/media/Data/hudba"
 playlist_directory "/var/lib/mpd/playlists"
 db_file            "/var/lib/mpd/tag_cache"
 log_file           "/var/log/mpd/mpd.log"
-pid_file           "/run/mpd/pid"
+pid_file           "~/.mpd/pid"
 state_file         "/var/lib/mpd/state"
 sticker_file       "/var/lib/mpd/sticker.sql"
 
@@ -19,16 +19,20 @@ input {
 }
 
 audio_output {
-  type        "pulse"
-  name        "My Pulse Output"
-  #server      "remote_server"     # optional
-  #sink        "remote_server_sink"    # optional
+    type        "alsa"
+    name        "My ALSA Device"
+    #device      "hw:0,0"    # optional
+    #format      "44100:16:2"    # optional
+    #mixer_type      "hardware"      # optional
+    #mixer_device    "default"   # optional
+    #mixer_control   "PCM"       # optional
+    #mixer_index "0"     # optional
 }
 
-mixer_type      "software"
+#mixer_type      "software"
 
-audio_buffer_size      "8096"
-buffer_before_play     "10%"
+#audio_buffer_size      "512"
+#buffer_before_play     "5%"
 
 filesystem_charset      "UTF-8"
 id3v1_encoding          "UTF-8"
