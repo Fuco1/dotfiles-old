@@ -25,7 +25,7 @@ fi
 feh --bg-scale '/home/matus/pictures/haskell.png'
 xrandr --output VGA-1 --auto --left-of LVDS-1 --output LVDS-1 --auto
 #xmodmap -e "pointer = 3 2 1 4 5" # seems to introduce weird bugs, but maybe it was shitty mouse instead
-xinput set-button-map 12 3 2 1 4 5
+xinput set-button-map 12 3 2 1 4 5 6 7 8 9 10 11 12 13
 
 #exec /usr/local/bin/stumpwm
 exec /usr/bin/xmonad
