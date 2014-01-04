@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
@@ -32,7 +33,7 @@ myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" "" . wrap "[" "]"
                  , ppVisible         = xmobarColor "#d3d7cf" "" . wrap "(" ")"
                  , ppHidden          = id
                  , ppHiddenNoWindows = const ""
-                 , ppUrgent          = xmobarColor "#cc0000" "" . wrap "*" "*"
+                 , ppUrgent          = xmobarColor "#cc0000" ""
                  , ppSep             = "│"
                  , ppWsSep           = " "
                  , ppTitle           = xmobarColor "#8cc4ff" "" . shorten 80
@@ -43,7 +44,7 @@ myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" "" . wrap "[" "]"
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmobarrc"
-       xmonad $ defaultConfig
+       xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook = manageDocks <+> manageHook defaultConfig
                 , layoutHook = avoidStruts $ smartBorders $ my_layout
