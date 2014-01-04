@@ -14,6 +14,7 @@
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/xfce4/*
+.conkeror.mozdev.org/*
 .dbus/*
 .emacs.d/*
 .fontconfig/*
@@ -33,6 +34,7 @@
 .thumbnails/*
 .xmonad/*
 .wine/*
+.w3m/*
 Anki/*
 bin/*
 quicklisp/*
@@ -56,3 +58,4 @@ source/*
 .zcompdump
 .zsh_histfile
 playlist-radia
+/.mpd/pid
