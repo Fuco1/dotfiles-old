@@ -1,3 +1,12 @@
+/// sessions
+require("session.js");
+session_auto_save_auto_load = true;
+
+session_pref("signon.rememberSignons", true);
+session_pref("signon.expireMasterPassword", false);
+session_pref("signon.SignonFileName", "signons.txt");
+Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
+
 modifiers.M = new modifier(
   function (event) { return event.metaKey; },
   function (event) { event.metaKey = true; });
