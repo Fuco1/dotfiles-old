@@ -63,7 +63,7 @@ main = do
                 , ("<XF86AudioNext>", spawn "mpc next")
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
-                , ("<XF86AudioMute>", spawn "amixer -D pulse -q set Master toggle")
+                , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io (exitWith ExitSuccess))
                 , ("M2-<Pause>",
