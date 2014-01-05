@@ -7,9 +7,13 @@ session_pref("signon.expireMasterPassword", false);
 session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
+/// modifiers
 modifiers.M = new modifier(
   function (event) { return event.metaKey; },
   function (event) { event.metaKey = true; });
+
+/// emacs as external editor
+editor_shell_command = "emacsclient -c";
 
 /// keys
 define_key(content_buffer_normal_keymap, "v", "follow-new-buffer");
