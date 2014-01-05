@@ -115,3 +115,9 @@ define_key(default_global_keymap, "C-T", "revive-buffer");
        return file.path;
    }
 }
+
+/// webjumps
+define_opensearch_webjump("w", "wikipedia.xml");
+define_opensearch_webjump("wd", "wiktionary.xml");
+define_webjump("y", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_webjump("imdb", "http://imdb.com/find?q=%s");
