@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+emacsclient -e "(my-org-status)" | tr -d "\""
+
+# Local Variables:
+# mode: shell-script
+# End:
