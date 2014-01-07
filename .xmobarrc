@@ -3,21 +3,23 @@ Config { font = "xft:Monospace-8:narrow"
        , bgColor = "black"
        , fgColor = "#888a85"
        , position = Top
-       , commands = [ Run Weather "LZSL" ["-t","<tempC>","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
-                    , Run MultiCpu ["-t", "<total0>|<total1>", "-p", "2", "-L","10","-H","50","--normal","green","--high","red"] 10
+       , commands = [ Run Weather "LZSL" ["-t","<tempC>","-L","64","-H","77",
+                                          "--normal","#8ae234","--high","#ef2929","--low","#8cc4ff"] 36000
+                    , Run MultiCpu ["-t", "<total0>|<total1>", "-p", "2", "-L","10","-H","50","--normal","#8ae234","--high","#ef2929"] 10
                     , Run Memory ["-t","<usedratio>%","-p", "2"] 10
-                    , Run Date "%a %b %_d %H:%M:%S" "date" 10
+                    , Run Date "%a %b %d %H:%M:%S" "date" 10
                     , Run CoreTemp ["-t", "<core0>|<core1>|",
                                     "-L", "40", "-H", "60",
                                     "-l", "lightblue", "-n", "gray90", "-h", "red"] 20
                     , Run Com "/home/matus/bin/nvidia-temp" [] "nvidiatemp" 20
-                    , Run MPD ["-t", "[<artist>] <title> <statei> <bar> <lapsed>/<length>" ,
+                    , Run MPD ["-t", "<fc=#204a87><artist></fc> <title> <statei> <bar> <lapsed>/<length>" ,
                               "--", "-P", "<fc=#8ae234>>></fc>", "-Z", "<fc=#edd400>||</fc>", "-S", "<fc=#ef2929>XX</fc>"] 10
-                    , Run Volume "default" "Master" ["-t", "<volume> <status>", "--", "-O", "✓", "-o", "X"] 10
+                    , Run Volume "default" "Master" ["-t", "<status><volume></fc>",
+                                                     "--", "-O", "<fc=#8ae234>", "-o", "<fc=#ef2929>"] 10
                     , Run Com "/home/matus/bin/emacs-active-task" [] "active-task" 50
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %active-task% │ %mpd% │%default:Master%│%multicpu%|%coretemp%%nvidiatemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%LZSL%"
+       , template = "%StdinReader% }{ %active-task%│%mpd%│%default:Master%│%multicpu%|%coretemp%%nvidiatemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%LZSL%"
        }
