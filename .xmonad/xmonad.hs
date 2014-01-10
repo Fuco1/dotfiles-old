@@ -29,8 +29,8 @@ my_layout = tiled ||| Full
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" "" . wrap "[" "]"
-                 , ppVisible         = xmobarColor "#d3d7cf" "" . wrap "(" ")"
+myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
+                 , ppVisible         = xmobarColor "#d3d7cf" ""
                  , ppHidden          = id
                  , ppHiddenNoWindows = const ""
                  , ppUrgent          = xmobarColor "#cc0000" ""
