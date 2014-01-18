@@ -6,6 +6,10 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
+import XMonad.Prompt
+import XMonad.Prompt.RunOrRaise
+import XMonad.Prompt.Shell
+import XMonad.Prompt.Window
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
 import XMonad.Util.Run(spawnPipe)
@@ -42,6 +46,23 @@ myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                  , ppExtras          = []
                  }
 
+myXPConfig = defaultXPConfig { font = "xft:Monospace-12:narrow"
+                             , bgColor = "black"
+                             , fgColor = "#888a85"
+                             , fgHLight = "#eeeeec"
+                             , bgHLight = "#3465a4"
+                             , borderColor = "#008800"
+                             , promptKeymap = emacsLikeXPKeymap
+                             , height = 25
+                             , searchPredicate = subseq
+                             , alwaysHighlight = True
+                             }
+
+subseq :: Eq a => [a] -> [a] -> Bool
+[]     `subseq` _      = True
+(_:_ ) `subseq` []     = False
+(a:as) `subseq` (b:bs) = (if a == b then as else a:as) `subseq` bs
+
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmobarrc"
        xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
@@ -61,9 +82,13 @@ main = do
                 , ("<XF86AudioStop>", spawn "mpc stop")
                 , ("<XF86AudioPrev>", spawn "mpc prev")
                 , ("<XF86AudioNext>", spawn "mpc next")
+                , ("M2-<XF86AudioRaiseVolume>", spawn "mpc volume +3")
+                , ("M2-<XF86AudioLowerVolume>", spawn "mpc volume -3")
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
+                , ("<XF86Mail>", windowPromptGoto myXPConfig)
+                , ("M2-<XF86Mail>", runOrRaisePrompt myXPConfig)
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io (exitWith ExitSuccess))
                 , ("M2-<Pause>",
@@ -72,9 +97,9 @@ main = do
                 (
                   [
                   ((mod2Mask, xK_c), kill)
-                , ((mod2Mask, xK_p), spawn "dmenu_run -p 'Run> ' -b -nf '#888a85' -nb '#2e3436' -sf '#eeeeec' -sb '#3465a4'")
-                , ((mod2Mask, xK_period), screenWorkspace 0 >>= flip whenJust (windows . W.view))
-                , ((mod2Mask, xK_comma), screenWorkspace 1 >>= flip whenJust (windows . W.view))
+                , ((mod2Mask, xK_p), runOrRaisePrompt myXPConfig) -- spawn "dmenu_run -p 'Run> ' -b -nf '#888a85' -nb '#2e3436' -sf '#eeeeec' -sb '#3465a4'")
+                , ((mod2Mask, xK_period), screenWorkspace 1 >>= flip whenJust (windows . W.view))
+                , ((mod2Mask, xK_comma), screenWorkspace 0 >>= flip whenJust (windows . W.view))
                 , ((mod2Mask .|. shiftMask, xK_period), screenWorkspace 0 >>=
                                                         flip whenJust (windows . W.shift))
                 , ((mod2Mask .|. shiftMask, xK_comma), screenWorkspace 1 >>=
@@ -104,3 +129,6 @@ main = do
 -- brno letisko LKTB
 -- sliac letisko LZSL
 -- http://www.airports-worldwide.info/index.php?page=airport
+
+-- todo
+--- window list https://bbs.archlinux.org/viewtopic.php?pid=966494 + search/prompt
