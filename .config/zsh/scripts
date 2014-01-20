@@ -8,6 +8,7 @@ function wgets () { wget --ask-password --user="$1" "$2"; }
 function unum() { uptime | awk '{ print $6 " " substr($7,1,length($7)-1) }'; }
 function cph() { cp $1 ~/.; }
 function words() { (cd "/media/Data/languages/Latin/Words/" && wine words.exe) ; }
+function utorrent() { (cd "/media/System/Program Files (x86)/uTorrent/" && wine uTorrent.exe) ; }
 
 # All in one archive extract
 extract () {
