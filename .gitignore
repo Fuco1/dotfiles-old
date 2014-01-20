@@ -14,7 +14,9 @@
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/xfce4/*
+.config/vlc/*
 .conkeror.mozdev.org/*
+.darcs/*
 .dbus/*
 .emacs.d/*
 .fontconfig/*
@@ -26,6 +28,7 @@
 .local/*
 .macromedia/*
 .mozilla/*
+.nv/*
 .opera/*
 .slime/*
 .ssh/*
@@ -57,4 +60,7 @@ source/*
 .zcompdump
 .zsh_histfile
 playlist-radia
-/.mpd/pid
+.mpd/pid
+.ncmpcpp/error.log
+.ncmpcpp/patterns.list
+Calibre Library/*
