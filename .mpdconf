@@ -29,7 +29,7 @@ audio_output {
     #mixer_index "0"     # optional
 }
 
-#mixer_type      "software"
+mixer_type      "software"
 
 #audio_buffer_size      "512"
 #buffer_before_play     "5%"
