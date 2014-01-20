@@ -7,6 +7,9 @@ session_pref("signon.expireMasterPassword", false);
 session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
+/// variables
+minibuffer_completion_rows = 20
+
 /// modifiers
 modifiers.M = new modifier(
   function (event) { return event.metaKey; },
@@ -15,12 +18,33 @@ modifiers.M = new modifier(
 /// emacs as external editor
 editor_shell_command = "emacsclient -c";
 
+/// global settings/switches
+mode_line_mode(false);
+
+/// buffers ordered by recency
+interactive("switch-to-recent-buffer",
+    "Prompt for a buffer and switch to it, displaying the list in last-visited order.",
+            function (I) {
+        switch_to_buffer(
+            I.window,
+            (yield I.minibuffer.read_buffer(
+                $prompt = "Switch to buffer:",
+                $buffers = I.window.buffers.buffer_history,
+                $default = (I.window.buffers.count > 1 ?
+                            I.window.buffers.buffer_history[1] :
+                            I.buffer))));
+    });
+
+define_key(default_global_keymap, "C-m", "switch-to-recent-buffer");
+
 /// keys
 define_key(content_buffer_normal_keymap, "v", "follow-new-buffer");
 define_key(content_buffer_normal_keymap, "V", "follow-new-buffer-background");
 
 define_key(content_buffer_normal_keymap, "M-k", "kill-current-buffer");
-define_key(content_buffer_normal_keymap, "C-m", "switch-to-buffer");
+
+define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown");
+define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp");
 
 /// DOM/element selections
 require("element.js");
@@ -35,9 +59,9 @@ define_key(content_buffer_normal_keymap, "* l", "browser-object-list");
 interactive("switch-to-other-buffer",
             "Switch to the previously open buffer",
             function (I) {
-                var blist = I.window.buffers.buffer_list
+                var blist = I.window.buffers.buffer_history;
                 if (blist.length > 1)
-                    switch_to_buffer(I.window, blist[1]);
+                  switch_to_buffer(I.window, blist[1]);
             });
 define_key(default_global_keymap, "C-x C-a", "switch-to-other-buffer");
 
