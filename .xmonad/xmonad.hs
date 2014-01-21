@@ -16,13 +16,13 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.WorkspaceCompare
 import qualified XMonad.StackSet as W
 
-my_workspaces :: [WorkspaceId]
-my_workspaces = ["tc1", "irc", "op1", "em1", "ank", "ws6", "ws7", "ws8", "ws9", "ws0",
+myWorkspaces :: [WorkspaceId]
+myWorkspaces = ["tc1", "irc", "op1", "em1", "ank", "ws6", "ws7", "ws8", "ws9", "ws0",
                  "tc2", "pdf", "op2", "em2"]
 -- 1,..,9,0
 -- a,s,d,f
 
-my_layout = tiled ||| Full
+myLayout = tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -68,14 +68,14 @@ main = do
        xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook = manageDocks <+> manageHook defaultConfig
-                , layoutHook = avoidStruts $ smartBorders $ my_layout
+                , layoutHook = avoidStruts $ smartBorders $ myLayout
                 , logHook = dynamicLogWithPP myPP { ppOutput = hPutStrLn xmproc }
                 , modMask = mod4Mask
                 , borderWidth        = 1
                 , terminal           = "urxvtc"
                 , normalBorderColor  = "#000000"
                 , focusedBorderColor = "#008800"
-                , workspaces = my_workspaces
+                , workspaces = myWorkspaces
                 } `additionalKeysP`
                 [
                   ("<XF86AudioPlay>", spawn "mpc toggle")
@@ -88,7 +88,6 @@ main = do
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
                 , ("<XF86Mail>", windowPromptGoto myXPConfig)
-                , ("M2-<XF86Mail>", runOrRaisePrompt myXPConfig)
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io (exitWith ExitSuccess))
                 , ("M2-<Pause>",
@@ -111,10 +110,10 @@ main = do
                 , ((mod4Mask, xK_b), sendMessage ToggleStruts)
                 ] ++
                 [((m .|. mod4Mask, k), windows $ f i)
-                | (i, k) <- zip my_workspaces workspaceKeys
+                | (i, k) <- zip myWorkspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
                 [((m .|. mod2Mask, k), windows $ f i)
-                | (i, k) <- zip my_workspaces workspaceKeys
+                | (i, k) <- zip myWorkspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
                 )
          where
