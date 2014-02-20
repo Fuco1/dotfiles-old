@@ -2,6 +2,7 @@ import System.Exit
 import System.IO
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.CycleWindows
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
@@ -105,6 +106,9 @@ main = do
                                                        flip whenJust (windows . W.shift))
                 , ((mod4Mask, xK_p), windows W.focusDown)
                 , ((mod4Mask, xK_n), windows W.focusUp)
+                , ((mod2Mask, xK_bracketleft), windows W.focusDown)
+                , ((mod2Mask, xK_bracketright), windows W.focusUp)
+                , ((mod2Mask, xK_equal), cycleRecentWindows [xK_Alt_R] xK_equal xK_minus)
                 , ((mod4Mask .|. shiftMask, xK_p), windows W.swapDown)
                 , ((mod4Mask .|. shiftMask, xK_n), windows W.swapUp)
                 , ((mod4Mask, xK_b), sendMessage ToggleStruts)
