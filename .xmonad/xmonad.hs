@@ -40,7 +40,7 @@ myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                  , ppUrgent          = xmobarColor "#cc0000" ""
                  , ppSep             = "│"
                  , ppWsSep           = " "
-                 , ppTitle           = xmobarColor "#8cc4ff" "" . shorten 80
+                 , ppTitle           = xmobarColor "#8cc4ff" ""
                  , ppLayout          = (:[]) . head
                  , ppOrder           = id
                  , ppExtras          = []
