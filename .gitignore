@@ -3,6 +3,7 @@
 .cabal/*
 .cache/*
 .config/caja/*
+.config/calibre/*
 .config/chromium/*
 .config/dconf/*
 .config/gtk-2.0/*
