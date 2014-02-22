@@ -18,8 +18,8 @@ import XMonad.Util.WorkspaceCompare
 import qualified XMonad.StackSet as W
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["tc1", "irc", "op1", "em1", "ank", "ws6", "ws7", "ws8", "ws9", "ws0",
-                 "tc2", "pdf", "op2", "em2"]
+myWorkspaces = ["t1", "ir", "o1", "e1", "an", "w6", "w7", "w8", "w9", "w0",
+                "t2", "do", "o2", "e2"]
 -- 1,..,9,0
 -- a,s,d,f
 
