@@ -7,7 +7,7 @@ Config { font = "xft:Monospace-8:narrow"
                                           "--normal","#8ae234","--high","#ef2929","--low","#8cc4ff"] 36000
                     , Run MultiCpu ["-t", "<total0>|<total1>", "-p", "2", "-L","10","-H","50","--normal","#8ae234","--high","#ef2929"] 10
                     , Run Memory ["-t","<usedratio>%","-p", "2"] 10
-                    , Run Date "%a %b %d %H:%M:%S" "date" 10
+                    , Run Date "%a%b%d%H:%M:%S" "date" 10
                     , Run CoreTemp ["-t", "<core0>|<core1>|",
                                     "-L", "40", "-H", "60",
                                     "-l", "lightblue", "-n", "gray90", "-h", "red"] 20

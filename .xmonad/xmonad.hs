@@ -18,8 +18,8 @@ import XMonad.Util.WorkspaceCompare
 import qualified XMonad.StackSet as W
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["t1", "ir", "o1", "e1", "an", "w6", "w7", "w8", "w9", "w0",
-                "t2", "do", "o2", "e2"]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+                "q", "w", "e", "r"]
 -- 1,..,9,0
 -- a,s,d,f
 
@@ -40,7 +40,7 @@ myPP = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                  , ppHiddenNoWindows = const ""
                  , ppUrgent          = xmobarColor "#cc0000" ""
                  , ppSep             = "│"
-                 , ppWsSep           = " "
+                 , ppWsSep           = ""
                  , ppTitle           = xmobarColor "#8cc4ff" ""
                  , ppLayout          = (:[]) . head
                  , ppOrder           = id
