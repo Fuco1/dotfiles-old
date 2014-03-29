@@ -3,8 +3,9 @@
 xmodmap ~/.xmodmap
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-autocutsel -fork &
-autocutsel -selection PRIMARY -fork &
+# autocutsel -fork &
+# autocutsel -selection PRIMARY -fork &
+xcmenu --daemon
 
 /usr/bin/udisks --mount /dev/sda1
 /usr/bin/udisks --mount /dev/sda2
