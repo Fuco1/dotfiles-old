@@ -53,7 +53,7 @@ alias youtube-mp3='youtube-dl -t --extract-audio --audio-format mp3 --audio-qual
 # ssh
 alias aisa='ssh xgoljer@aisa.fi.muni.cz'
 alias nymfe='ssh xgoljer@nymfe33.fi.muni.cz'
-alias dasnet="ssh fuco@dasnet.cz"
+alias dasnet="TERM=xterm-256color ssh fuco@dasnet.cz"
 
 # app installation
 alias ins='sudo apt-get install'
