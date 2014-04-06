@@ -113,6 +113,7 @@ main = do
                 , ((mod4Mask .|. shiftMask, xK_p), windows W.swapDown)
                 , ((mod4Mask .|. shiftMask, xK_n), windows W.swapUp)
                 , ((mod4Mask, xK_b), sendMessage ToggleStruts)
+                , ((mod4Mask .|. shiftMask, xK_b), broadcastMessage ToggleStruts >> refresh)
                 ] ++
                 [((m .|. mod4Mask, k), windows $ f i)
                 | (i, k) <- zip myWorkspaces workspaceKeys
