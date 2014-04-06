@@ -89,6 +89,7 @@ main = do
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
                 , ("<XF86Mail>", windowPromptGoto myXPConfig)
+                , ("<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io (exitWith ExitSuccess))
                 , ("M2-<Pause>",
