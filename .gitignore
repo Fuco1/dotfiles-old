@@ -74,7 +74,6 @@
 Anki/*
 Calibre Library/*
 __sync/*
-bin/*
 downloads/*
 drill/*
 mnsymbol/*
@@ -86,3 +85,4 @@ script/*
 source/*
 stuff/*
 texmf/*
+screens/*
