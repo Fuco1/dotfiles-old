@@ -90,6 +90,7 @@ main = do
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
+                , ("<XF86Sleep>", spawn "sudo s2ram -f")
                 , ("<XF86Mail>", windowPromptGoto myXPConfig)
                 , ("<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("M2-<Backspace>", toggleWS)
