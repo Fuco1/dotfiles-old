@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.CycleWindows
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
@@ -66,11 +67,12 @@ subseq :: Eq a => [a] -> [a] -> Bool
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmobarrc"
-       xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
+       xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook = manageDocks <+> manageHook defaultConfig
                 , layoutHook = avoidStruts $ smartBorders $ myLayout
                 , logHook = dynamicLogWithPP myPP { ppOutput = hPutStrLn xmproc }
+                , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
                 , modMask = mod4Mask
                 , borderWidth        = 1
                 , terminal           = "urxvtc"
