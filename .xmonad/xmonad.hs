@@ -90,7 +90,7 @@ main = do
                   manageHook = myManageHook
                 , layoutHook = avoidStruts $ smartBorders $ myLayout
                 , logHook = dynamicLogWithPP myPP { ppOutput = hPutStrLn xmproc }
-                , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
+                , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook
                 , modMask = mod4Mask
                 , borderWidth        = 1
                 , terminal           = "urxvtc"
