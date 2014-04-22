@@ -1,11 +1,13 @@
 import System.Exit
 import System.IO
 import XMonad
+import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.CycleWindows
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Prompt
@@ -60,6 +62,22 @@ myXPConfig = defaultXPConfig { font = "xft:Monospace-12:narrow"
                              , alwaysHighlight = True
                              }
 
+myManageHook = (composeOne . concat $
+    [ [ isDialog -?> doFloat
+      , transience
+      , isFullscreen -?> doFullFloat ]
+    , [ className =? c -?> doFloat | c <- myCFloats ]
+    , [ title     =? t -?> doFloat | t <- myTFloats ]
+    , [ resource  =? r -?> doFloat | r <- myRFloats ]
+    , [ className =? "Xfce4-notifyd" -?> doIgnore <+> doF copyToAll ]
+    ])
+    <+> manageDocks
+    <+> manageHook defaultConfig
+    where
+        myCFloats = []
+        myTFloats = []
+        myRFloats = []
+
 subseq :: Eq a => [a] -> [a] -> Bool
 []     `subseq` _      = True
 (_:_ ) `subseq` []     = False
@@ -69,7 +87,7 @@ main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmobarrc"
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
-                  manageHook = manageDocks <+> manageHook defaultConfig
+                  manageHook = myManageHook
                 , layoutHook = avoidStruts $ smartBorders $ myLayout
                 , logHook = dynamicLogWithPP myPP { ppOutput = hPutStrLn xmproc }
                 , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
