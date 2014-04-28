@@ -52,6 +52,7 @@ main = do
                 , ("M2-<Pause>", recompileXMonad)
                 , ("M2-<XF86HomePage>", MPDPrompts.playPlaylist)
                 , ("M4-<XF86AudioPlay>", MPDPrompts.playArtist)
+                , ("M4-<XF86AudioStop>", MPDPrompts.playTrack)
                 , ("M2-c", kill)
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
                 , ("M2-,", screenWorkspace 0 >>= flip whenJust (windows . W.view))

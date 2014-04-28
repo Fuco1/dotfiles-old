@@ -1,9 +1,12 @@
 module MPDPrompts (
   playPlaylist
   , playArtist
+  , playTrack
   ) where
 
 import Control.Applicative ((<$>))
+import Data.List (elemIndex, isInfixOf)
+import Data.Maybe (fromJust)
 import XMonad
 import XMonad.Prompt
 import XMonad.Util.Run (runProcessWithInput)
@@ -32,6 +35,18 @@ playArtist = mpdPrompt
                                    , ["findadd", "Artist", x]
                                    , ["toggle"]
                                    ])
+
+playTrack :: X ()
+playTrack = mkXPrompt
+            (MPDPrompt "Play track")
+            Constants.prompt
+            (\x -> filter (isInfixOf (strToLower x) . strToLower) <$> tracks)
+            (\x -> do tr <- liftIO tracks
+                      let t = (fromJust . elemIndex x) tr
+                      runProcessWithInput "mpc" ["play", show (1 + t)] ""
+                      return ())
+  where tracks = lines <$> runProcessWithInput "mpc" query ""
+        query = ["-f", "%title%", "playlist"]
 
 mpdPrompt :: String -> [String] -> (String -> X ()) -> X ()
 mpdPrompt prompt query action = mkXPrompt
