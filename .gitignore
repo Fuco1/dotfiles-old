@@ -67,7 +67,13 @@
 .w3m/*
 .windows-serial
 .wine/*
-.xmonad/*
+.xmonad/*.hi
+.xmonad/*.o
+.xmonad/lib/*.hi
+.xmonad/lib/*.o
+.xmonad/xmonad.errors
+.xmonad/history
+.xmonad/xmonad-x86_64-linux
 .xsession-errors
 .zcompdump
 .zsh_histfile
@@ -86,3 +92,9 @@ source/*
 stuff/*
 texmf/*
 screens/*
+/.cask/
+/.config/htop/htoprc
+/.calibre_calibre GUI.lock
+/.bash_history
+/256colors2.pl
+/270px-Emacs-logo.svg.png
