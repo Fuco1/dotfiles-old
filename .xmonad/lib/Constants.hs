@@ -30,7 +30,7 @@ workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 
 layout = tiled ||| Full
   where
-    tiled = Tall 1 (2/3) (3/100)
+    tiled = Tall 1 (3/100) (2/3)
 
 
 printer = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
