@@ -16,11 +16,11 @@ import XMonad.Util.Run (spawnPipe)
 import qualified XMonad.StackSet as W
 
 import qualified Constants
-import MPDPrompts
+import MPD
 import Utils
 
 main = do
-       xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmobarrc"
+       xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = Constants.manageHook
@@ -34,13 +34,19 @@ main = do
                 , focusedBorderColor = "#008800"
                 , workspaces         = Constants.workspaces
                 } `additionalKeysP`
-                [
-                  ("<XF86AudioPlay>",           spawn "mpc toggle")
-                , ("<XF86AudioStop>",           spawn "mpc stop")
-                , ("<XF86AudioPrev>",           spawn "mpc prev")
-                , ("<XF86AudioNext>",           spawn "mpc next")
-                , ("M2-<XF86AudioRaiseVolume>", spawn "mpc volume +3")
-                , ("M2-<XF86AudioLowerVolume>", spawn "mpc volume -3")
+                [ ("<XF86AudioPlay>",    MPD.toggle)
+                , ("<XF86AudioStop>",    MPD.stop)
+                , ("<XF86AudioPrev>",    MPD.previous)
+                , ("<XF86AudioNext>",    MPD.next)
+                , ("<XF86Mail> <F9>",    MPD.playPlaylist Clear)
+                , ("<XF86Mail> <F10>",   MPD.playArtist Clear)
+                , ("<XF86Mail> <F11>",   MPD.playDirectory Clear)
+                , ("<XF86Mail> u <F9>",  MPD.playPlaylist Add)
+                , ("<XF86Mail> u <F10>", MPD.playArtist Add)
+                , ("<XF86Mail> u <F11>", MPD.playDirectory Add)
+                , ("<XF86Mail> <F12>",   MPD.playTrack)
+                , ("<XF86Mail> d",       MPD.deleteCurrent)
+                , ("<XF86Mail> c",       MPD.clear)
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>",        spawn "amixer -q set Master toggle")
@@ -49,9 +55,6 @@ main = do
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io (exitWith ExitSuccess))
                 , ("M2-<Pause>", recompileXMonad)
-                , ("<XF86Mail> <F9>", MPDPrompts.playPlaylist)
-                , ("<XF86Mail> <F10>", MPDPrompts.playArtist)
-                , ("<XF86Mail> <F12>", MPDPrompts.playTrack)
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
                 , ("<XF86Mail> <XF86Mail>", windowPromptGoto Constants.prompt)
                 , ("M2-c", kill)
