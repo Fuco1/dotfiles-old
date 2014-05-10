@@ -58,6 +58,7 @@
 .opera/*
 .pki/*
 .slime/*
+.slocdata/*
 .ssh/*
 .ssr/*
 .subversion/*
@@ -98,3 +99,5 @@ screens/*
 /.bash_history
 /256colors2.pl
 /270px-Emacs-logo.svg.png
+/.aspell.en.prepl
+/.nvidia-settings-rc
