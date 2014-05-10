@@ -4,7 +4,7 @@ module MPD
        ( playPlaylist
        , playArtist
        , playDirectory
-       , playTrack
+       , jumpToTrack
        , Action(..)
        , deleteCurrent
        , MPD.clear
@@ -72,8 +72,8 @@ playDirectory action = do
     addMany "" songs
     when (action == Clear) $ play Nothing
 
-playTrack :: X ()
-playTrack = do
+jumpToTrack :: X ()
+jumpToTrack = do
   Right choices <- liftMPD $ playlistInfo Nothing
   mkXPrompt
     (MPDPrompt "Jump to track")

@@ -44,7 +44,7 @@ main = do
                 , ("<XF86Mail> u <F9>",  MPD.playPlaylist Add)
                 , ("<XF86Mail> u <F10>", MPD.playArtist Add)
                 , ("<XF86Mail> u <F11>", MPD.playDirectory Add)
-                , ("<XF86Mail> <F12>",   MPD.playTrack)
+                , ("<XF86Mail> <F12>",   MPD.jumpToTrack)
                 , ("<XF86Mail> d",       MPD.deleteCurrent)
                 , ("<XF86Mail> c",       MPD.clear)
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
