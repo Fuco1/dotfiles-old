@@ -59,5 +59,5 @@ manageHook = (composeOne . concat $
     <+> XMonad.manageHook defaultConfig
     where
         myCFloats = []
-        myTFloats = []
+        myTFloats = ["GLFW-b-demo"]
         myRFloats = []
