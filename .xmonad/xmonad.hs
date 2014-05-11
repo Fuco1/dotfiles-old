@@ -1,4 +1,4 @@
-import System.Exit (exitWith, ExitCode (ExitSuccess))
+import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 import System.Process (readProcess)
 import XMonad
@@ -24,7 +24,7 @@ main = do
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = Constants.manageHook
-                , layoutHook         = avoidStruts $ smartBorders $ Constants.layout
+                , layoutHook         = avoidStruts $ smartBorders Constants.layout
                 , logHook            = dynamicLogWithPP Constants.printer { ppOutput = hPutStrLn xmproc }
                 , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook
                 , modMask            = mod4Mask
@@ -53,7 +53,7 @@ main = do
                 , ("<XF86Sleep>", spawn "sudo s2ram -f")
                 , ("<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("M2-<Backspace>", toggleWS)
-                , ("M2-S-<Pause>", io (exitWith ExitSuccess))
+                , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
                 , ("<XF86Mail> <XF86Mail>", windowPromptGoto Constants.prompt)

@@ -50,13 +50,13 @@ playArtist :: Action -> X ()
 playArtist = playGeneric
              listArtists
              "artist"
-             (\x -> findAdd (Artist =? (mkValue x)))
+             (\x -> findAdd (Artist =? mkValue x))
 
 playGeneric :: ToString a => MPD [a] -> String -> (String -> MPD ()) -> Action -> X ()
 playGeneric getter prompt mpd action = do
   Right choices <- liftMPD getter
   Just pick <- askPrompt
-               ((if (action == Clear) then "Play " else "Add ") ++ prompt)
+               ((if action == Clear then "Play " else "Add ") ++ prompt)
                . map toString $ choices
   liftMPD_ $ do
     when (action == Clear) M.clear
@@ -85,18 +85,18 @@ jumpToTrack = do
 trackCompl :: [Song] -> String -> IO [String]
 trackCompl choices pick = return mapped
   where picked = filter (isInfixOf pick . strToLower . getName) choices
-        grouped = groupBy ((==) `on` getName) picked
+        grouped = groupBy ((==) `on` strToLower . getName) picked
         mapped = grouped >>= (\x -> case x of
                                  [a] -> [indexify a]
                                  xs  -> map (\v -> indexify v ++ " [" ++ getAlbum v ++ "]") xs)
         getName (Song { sgFilePath = Path path
                       , sgTags = tags })
           = case lookup Title tags of
-              Just ([Value x]) -> C.unpack x
+              Just [Value x] -> C.unpack x
               Nothing          -> C.unpack path
         getAlbum (Song { sgTags = tags })
           = case lookup Album tags of
-              Just ([Value x]) -> C.unpack x
+              Just [Value x] -> C.unpack x
               Nothing          -> ""
         getIndex (Song { sgIndex = Just index }) = show index
         indexify = uncurry (++) . (flip (++) ": " . getIndex &&& getName)
@@ -107,7 +107,7 @@ askPrompt name choices =
   mkXPromptWithReturn
     (MPDPrompt name)
     Constants.prompt
-    (return . (flip filter) choices . (isInfixOf `on` strToLower))
+    (return . flip filter choices . (isInfixOf `on` strToLower))
     return
 
 listDirectorySongs :: String -> X (Maybe String)
@@ -134,7 +134,7 @@ getPlaylists = liftM getPlaylistsFromResults . lsInfo . mkPath $ ""
 getSongs :: String -> MPD [Path]
 getSongs path = do
   songs <- liftM getSongsFromResults . lsInfo . mkPath $ path
-  return $ [x | Song {sgFilePath = x} <- songs]
+  return [x | Song {sgFilePath = x} <- songs]
 
 ---------------------------------------- projections from results
 getSongsFromResults :: [LsResult] -> [Song]
