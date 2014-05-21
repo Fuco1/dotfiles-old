@@ -1,3 +1,4 @@
+#xfce4-session
 #!/usr/bin/env bash
 
 xmodmap ~/.xmodmap
@@ -7,8 +8,8 @@ xmodmap ~/.xmodmap
 # autocutsel -selection PRIMARY -fork &
 xcmenu --daemon
 
-/usr/bin/udisks --mount /dev/sda1
-/usr/bin/udisks --mount /dev/sda2
+# /usr/bin/udisks --mount /dev/sda1
+# /usr/bin/udisks --mount /dev/sda2
 
 # start urxvt daemon
 urxvtc
@@ -23,14 +24,17 @@ if [ ! -f ~/.mpd/pid ] ; then
     mpd
 fi
 
-feh --bg-scale '/home/matus/pictures/haskell.png'
+feh --bg-scale '/home/matus/media/pictures/haskell.png'
 #xrandr --output VGA-1 --auto --left-of LVDS-1 --output LVDS-1 --auto // bez nvidia driverov
 #xrandr --output VGA-0 --auto --right-of LVDS-0 --output LVDS-0 --auto # home
 #xrandr --output VGA-0 --auto --left-of LVDS-0 --output LVDS-0 --auto # brno
 #xmodmap -e "pointer = 3 2 1 4 5" # seems to introduce weird bugs, but maybe it was shitty mouse instead
-xinput set-button-map 10 3 2 1 4 5 6 7 8 9 10 11 12 13
-xinput set-button-map 12 3 2 1 4 5 6 7 8 9 10 11 12 13
-xinput set-prop 12 "Device Enabled" 0
+mouseid=$(xinput | grep OPTICAL | cut -f 2 | sed s/id=//)
+if [[ ! -z $mouseid ]] ; then
+    xinput set-button-map $mouseid 3 2 1 4 5 6 7 8 9 10 11 12 13
+fi
+#xinput set-button-map 12 3 2 1 4 5 6 7 8 9 10 11 12 13
+#xinput set-prop 12 "Device Enabled" 0
 
 #exec /usr/local/bin/stumpwm
 exec /usr/bin/xmonad
