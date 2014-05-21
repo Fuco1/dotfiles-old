@@ -34,19 +34,23 @@ main = do
                 , focusedBorderColor = "#008800"
                 , workspaces         = Constants.workspaces
                 } `additionalKeysP`
-                [ ("<XF86AudioPlay>",    MPD.toggle)
-                , ("<XF86AudioStop>",    MPD.stop)
-                , ("<XF86AudioPrev>",    MPD.previous)
-                , ("<XF86AudioNext>",    MPD.next)
-                , ("<XF86Mail> <F9>",    MPD.playPlaylist Clear)
-                , ("<XF86Mail> <F10>",   MPD.playArtist Clear)
-                , ("<XF86Mail> <F11>",   MPD.playDirectory Clear)
-                , ("<XF86Mail> u <F9>",  MPD.playPlaylist Add)
-                , ("<XF86Mail> u <F10>", MPD.playArtist Add)
-                , ("<XF86Mail> u <F11>", MPD.playDirectory Add)
-                , ("<XF86Mail> <F12>",   MPD.jumpToTrack)
-                , ("<XF86Mail> d",       MPD.deleteCurrent)
-                , ("<XF86Mail> c",       MPD.clear)
+                [ ("<XF86AudioPlay>", MPD.toggle)
+                , ("<XF86AudioStop>", MPD.stop)
+                , ("<XF86AudioPrev>", MPD.previous)
+                , ("<XF86AudioNext>", MPD.next)
+                , (xmonadLeader "t",       MPD.toggle)
+                , (xmonadLeader "s",       MPD.stop)
+                , (xmonadLeader "p",       MPD.previous)
+                , (xmonadLeader "n",       MPD.next)
+                , (xmonadLeader "d",       MPD.deleteCurrent)
+                , (xmonadLeader "c",       MPD.clear)
+                , (xmonadLeader "<F9>",    MPD.playPlaylist Clear)
+                , (xmonadLeader "<F10>",   MPD.playArtist Clear)
+                , (xmonadLeader "<F11>",   MPD.playDirectory Clear)
+                , (xmonadLeader "u <F9>",  MPD.playPlaylist Add)
+                , (xmonadLeader "u <F10>", MPD.playArtist Add)
+                , (xmonadLeader "u <F11>", MPD.playDirectory Add)
+                , (xmonadLeader "<F12>",   MPD.jumpToTrack)
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>",        spawn "amixer -q set Master toggle")
@@ -56,7 +60,7 @@ main = do
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
-                , ("<XF86Mail> <XF86Mail>", windowPromptGoto Constants.prompt)
+                , (xmonadLeader "<Pause>", windowPromptGoto Constants.prompt)
                 , ("M2-c", kill)
                 , ("M2-,", screenWorkspace 0 >>= flip whenJust (windows . W.view))
                 , ("M2-.", screenWorkspace 1 >>= flip whenJust (windows . W.view))
@@ -82,6 +86,7 @@ main = do
                 )
          where
            workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
+           xmonadLeader = (++) "<Pause> "
 
 -- brno letisko LKTB
 -- sliac letisko LZSL
