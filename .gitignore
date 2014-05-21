@@ -50,12 +50,13 @@
 .lyrics/*
 .macromedia/*
 .mozilla/*
-.mpd/pid
+.mpd/*
 .nano_history
 .ncmpcpp/error.log
 .ncmpcpp/patterns.list
 .nv/*
 .opera/*
+.opera_mail/*
 .pki/*
 .slime/*
 .slocdata/*
@@ -81,15 +82,19 @@
 Anki/*
 Calibre Library/*
 __sync/*
+dev/*
 downloads/*
 drill/*
 mnsymbol/*
+media/*
+skola/*
 org/*
 pictures/*
 playlist-radia
 quicklisp/*
 script/*
-source/*
+sources/*
+languages/*
 stuff/*
 texmf/*
 screens/*
@@ -101,3 +106,4 @@ screens/*
 /270px-Emacs-logo.svg.png
 /.aspell.en.prepl
 /.nvidia-settings-rc
+/languages/
