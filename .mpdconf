@@ -1,12 +1,12 @@
 ## Hey emacs, this is -*- shell-script -*- file!
 
-music_directory    "/media/Data/hudba"
-playlist_directory "/var/lib/mpd/playlists"
-db_file            "/var/lib/mpd/tag_cache"
-log_file           "/var/log/mpd/mpd.log"
+music_directory    "~/media/music"
+playlist_directory "~/.mpd/playlists"
+db_file            "~/.mpd/tag_cache"
+log_file           "~/.mpd/mpd.log"
 pid_file           "~/.mpd/pid"
-state_file         "/var/lib/mpd/state"
-sticker_file       "/var/lib/mpd/sticker.sql"
+state_file         "~/.mpd/state"
+sticker_file       "~/.mpd/sticker.sql"
 
 
 bind_to_address     "localhost"
