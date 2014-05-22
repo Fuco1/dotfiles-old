@@ -38,19 +38,19 @@ main = do
                 , ("<XF86AudioStop>", MPD.stop)
                 , ("<XF86AudioPrev>", MPD.previous)
                 , ("<XF86AudioNext>", MPD.next)
-                , (xmonadLeader "t",       MPD.toggle)
-                , (xmonadLeader "s",       MPD.stop)
-                , (xmonadLeader "p",       MPD.previous)
-                , (xmonadLeader "n",       MPD.next)
-                , (xmonadLeader "d",       MPD.deleteCurrent)
-                , (xmonadLeader "c",       MPD.clear)
-                , (xmonadLeader "<F9>",    MPD.playPlaylist Clear)
-                , (xmonadLeader "<F10>",   MPD.playArtist Clear)
-                , (xmonadLeader "<F11>",   MPD.playDirectory Clear)
-                , (xmonadLeader "u <F9>",  MPD.playPlaylist Add)
-                , (xmonadLeader "u <F10>", MPD.playArtist Add)
-                , (xmonadLeader "u <F11>", MPD.playDirectory Add)
-                , (xmonadLeader "<F12>",   MPD.jumpToTrack)
+                , (leader <%> "t",       MPD.toggle)
+                , (leader <%> "s",       MPD.stop)
+                , (leader <%> "p",       MPD.previous)
+                , (leader <%> "n",       MPD.next)
+                , (leader <%> "d",       MPD.deleteCurrent)
+                , (leader <%> "c",       MPD.clear)
+                , (leader <%> "<F9>",    MPD.playPlaylist Clear)
+                , (leader <%> "<F10>",   MPD.playArtist Clear)
+                , (leader <%> "<F11>",   MPD.playDirectory Clear)
+                , (leader <%> "u" <%> "<F9>",  MPD.playPlaylist Add)
+                , (leader <%> "u" <%> "<F10>", MPD.playArtist Add)
+                , (leader <%> "u" <%> "<F11>", MPD.playDirectory Add)
+                , (leader <%> "<F12>",   MPD.jumpToTrack)
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>",        spawn "amixer -q set Master toggle")
@@ -60,7 +60,7 @@ main = do
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
-                , (xmonadLeader "<Pause>", windowPromptGoto Constants.prompt)
+                , (leader <%> leader, windowPromptGoto Constants.prompt)
                 , ("M2-c", kill)
                 , ("M2-,", screenWorkspace 0 >>= flip whenJust (windows . W.view))
                 , ("M2-.", screenWorkspace 1 >>= flip whenJust (windows . W.view))
@@ -86,7 +86,7 @@ main = do
                 )
          where
            workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
-           xmonadLeader = (++) "<Pause> "
+           leader = "<Pause>"
 
 -- brno letisko LKTB
 -- sliac letisko LZSL

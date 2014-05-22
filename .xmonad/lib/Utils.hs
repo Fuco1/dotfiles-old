@@ -3,6 +3,7 @@ module Utils
        , getFileName
        , strToLower
        , recompileXMonad
+       , (<%>)
        ) where
 
 import Data.Char (toLower)
@@ -21,3 +22,7 @@ strToLower = map toLower
 
 recompileXMonad :: X ()
 recompileXMonad = spawn "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
+
+infixr 6 <%>
+(<%>) :: String -> String -> String
+(<%>) = ((++) . (flip (++) " "))
