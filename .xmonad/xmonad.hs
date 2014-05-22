@@ -53,7 +53,7 @@ main = do
                 , (leader <%> "<F12>",   MPD.jumpToTrack)
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
-                , ("<XF86AudioMute>",        spawn "amixer -q set Master toggle")
+                , ("<XF86AudioMute>",        spawn "amixer -q -D pulse sset Master toggle")
                 , ("<XF86Sleep>", spawn "sudo s2ram -f")
                 , ("<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("M2-<Backspace>", toggleWS)
