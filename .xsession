@@ -25,16 +25,7 @@ if [ ! -f ~/.mpd/pid ] ; then
 fi
 
 feh --bg-scale '/home/matus/media/pictures/haskell.png'
-#xrandr --output VGA-1 --auto --left-of LVDS-1 --output LVDS-1 --auto // bez nvidia driverov
-#xrandr --output VGA-0 --auto --right-of LVDS-0 --output LVDS-0 --auto # home
-#xrandr --output VGA-0 --auto --left-of LVDS-0 --output LVDS-0 --auto # brno
-#xmodmap -e "pointer = 3 2 1 4 5" # seems to introduce weird bugs, but maybe it was shitty mouse instead
-mouseid=$(xinput | grep OPTICAL | cut -f 2 | sed s/id=//)
-if [[ ! -z $mouseid ]] ; then
-    xinput set-button-map $mouseid 3 2 1 4 5 6 7 8 9 10 11 12 13
-fi
-#xinput set-button-map 12 3 2 1 4 5 6 7 8 9 10 11 12 13
-#xinput set-prop 12 "Device Enabled" 0
 
-#exec /usr/local/bin/stumpwm
+bash /home/matus/.inputsetup
+sh /home/matus/.screenlayout/brno.sh
 exec /usr/bin/xmonad
