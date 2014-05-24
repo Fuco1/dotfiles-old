@@ -4,7 +4,7 @@ imgur_key="486690f872c678126a2c09a9e196ce1b"
 upload_connect_timeout="5"
 upload_timeout="120"
 upload_retries="1"
-SCREENS=~/screens
+SCREENS=~/media/screenshots
 notify_timeout=5000
 
 # notify <'ok'|'error'> <title> <text>
@@ -48,7 +48,9 @@ LAST_NO=${LAST_NUM_PNG%%\.png}
 NEXT_NO=$(( LAST_NO + 1 ))
 FILE=$(printf 'screen%04d.png' "$NEXT_NO")
 import $SCREENS/$FILE
-upload_image $SCREENS/$FILE
+if [[ ! $1 == "noupload" ]] ; then
+    upload_image $SCREENS/$FILE
+fi
 
 
 # Local Variables:
