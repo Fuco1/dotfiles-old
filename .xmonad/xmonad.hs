@@ -54,6 +54,7 @@ main = do
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>",        spawn "amixer -q -D pulse sset Master toggle")
+                , (leader <%> "<Insert>",    spawn "amixer -q -D pulse sset Master toggle")
                 , (leader <%> "<F7>",        spawn "/home/matus/bin/toggle-touchpad")
                 , ("<XF86Sleep>", spawn "sudo pm-suspend")
                 , ("<Print>" <%> "<Print>", spawn "/home/matus/bin/take-screenshot")
