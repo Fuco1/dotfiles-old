@@ -1,3 +1,4 @@
+import Control.Monad (liftM2)
 import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 import System.Process (readProcess)
@@ -83,9 +84,11 @@ main = do
                   [((m .|. mod4Mask, k), windows $ f i)
                 | (i, k) <- zip Constants.workspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
-                [((m .|. mod2Mask, k), windows $ f i)
+                  [((m .|. mod2Mask, k), windows $ f i)
                 | (i, k) <- zip Constants.workspaces workspaceKeys
-                , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+                , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
+                  [((mod2Mask .|. controlMask, k), windows $ liftM2 (.) W.greedyView W.shift $ i) -- liftM2 (.) f g = \x -> f x . g x
+                | (i, k) <- zip Constants.workspaces workspaceKeys ]
                 )
          where
            workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
