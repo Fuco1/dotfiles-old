@@ -15,7 +15,7 @@ import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
 import XMonad.Util.Run (spawnPipe)
 import qualified XMonad.StackSet as W
 
-import qualified Constants
+import qualified Constants as C
 import MPD
 import Utils
 import StackSetExtra as WX
@@ -24,16 +24,16 @@ main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
-                  manageHook         = Constants.manageHook
-                , layoutHook         = avoidStruts $ smartBorders Constants.layout
-                , logHook            = dynamicLogWithPP Constants.printer { ppOutput = hPutStrLn xmproc }
+                  manageHook         = C.manageHook
+                , layoutHook         = avoidStruts $ smartBorders C.layout
+                , logHook            = dynamicLogWithPP C.printer { ppOutput = hPutStrLn xmproc }
                 , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook
                 , modMask            = mod4Mask
                 , borderWidth        = 1
                 , terminal           = "urxvtc"
                 , normalBorderColor  = "#000000"
                 , focusedBorderColor = "#008800"
-                , workspaces         = Constants.workspaces
+                , workspaces         = C.workspaces
                 } `additionalKeysP`
                 [ ("<XF86AudioPlay>", MPD.toggle)
                 , ("<XF86AudioStop>", MPD.stop)
@@ -68,8 +68,8 @@ main = do
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
-                , ("M2-p", runOrRaisePrompt Constants.prompt)
-                , (leader <%> leader, windowPromptGoto Constants.prompt)
+                , ("M2-p", runOrRaisePrompt C.prompt)
+                , (leader <%> leader, windowPromptGoto C.prompt)
                 , ("M2-c", kill)
                 , ("M2-,", withScreen 0 W.view)
                 , ("M2-.", withScreen 1 W.view)
@@ -88,15 +88,15 @@ main = do
                 ] `additionalKeys`
                 (
                   [((m .|. mod4Mask, k), windows $ f i)
-                | (i, k) <- zip Constants.workspaces workspaceKeys
+                | (i, k) <- zip C.workspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
                   [((m .|. mod2Mask, k), windows $ f i)
-                | (i, k) <- zip Constants.workspaces workspaceKeys
+                | (i, k) <- zip C.workspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
                   [((mod2Mask .|. controlMask, k), windows $ WX.shiftAndView i)
-                | (i, k) <- zip Constants.workspaces workspaceKeys ] ++
+                | (i, k) <- zip C.workspaces workspaceKeys ] ++
                   [((mod4Mask .|. mod2Mask, k), windows $ WX.shiftAndViewAtOther i)
-                | (i, k) <- zip Constants.workspaces workspaceKeys ]
+                | (i, k) <- zip C.workspaces workspaceKeys ]
                 )
          where
            workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
