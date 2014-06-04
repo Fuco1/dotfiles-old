@@ -1,4 +1,3 @@
-import Control.Monad (liftM2)
 import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 import System.Process (readProcess)
@@ -19,6 +18,7 @@ import qualified XMonad.StackSet as W
 import qualified Constants
 import MPD
 import Utils
+import StackSetExtra as WX
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
@@ -68,10 +68,11 @@ main = do
                 , ("M2-p", runOrRaisePrompt Constants.prompt)
                 , (leader <%> leader, windowPromptGoto Constants.prompt)
                 , ("M2-c", kill)
-                , ("M2-,", screenWorkspace 0 >>= flip whenJust (windows . W.view))
-                , ("M2-.", screenWorkspace 1 >>= flip whenJust (windows . W.view))
-                , ("M2-S-,", screenWorkspace 0 >>= flip whenJust (windows . W.shift))
-                , ("M2-S-.", screenWorkspace 1 >>= flip whenJust (windows . W.shift))
+                , ("M2-,", withScreen 0 W.view)
+                , ("M2-.", withScreen 1 W.view)
+                , ("M2-S-,", withScreen 0 W.shift)
+                , ("M2-S-.", withScreen 1 W.shift)
+                , ("M2-/", windows WX.shiftToOtherScreen)
                 , ("M4-p", windows W.focusDown)
                 , ("M4-n", windows W.focusUp)
                 , ("M4-P", windows W.swapDown)
@@ -89,7 +90,9 @@ main = do
                   [((m .|. mod2Mask, k), windows $ f i)
                 | (i, k) <- zip Constants.workspaces workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
-                  [((mod2Mask .|. controlMask, k), windows $ liftM2 (.) W.greedyView W.shift $ i) -- liftM2 (.) f g = \x -> f x . g x
+                  [((mod2Mask .|. controlMask, k), windows $ WX.shiftAndView i)
+                | (i, k) <- zip Constants.workspaces workspaceKeys ] ++
+                  [((mod4Mask .|. mod2Mask, k), windows $ WX.shiftAndViewAtOther i)
                 | (i, k) <- zip Constants.workspaces workspaceKeys ]
                 )
          where
