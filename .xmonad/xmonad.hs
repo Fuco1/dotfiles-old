@@ -95,7 +95,7 @@ main = do
                   , ((controlMask .|. mod2Mask), WX.shiftAndView)
                   , ((mod4Mask .|. mod2Mask),    WX.shiftAndViewAtOther)
                   ]
-                  >>= (uncurry withWorkspacesD)
+                  >>= (uncurry C.withWorkspacesD)
                 )
          where
            leader = "<Pause>"

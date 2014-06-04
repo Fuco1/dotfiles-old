@@ -10,6 +10,7 @@ import XMonad.Prompt
 import XMonad.Util.Loggers
 
 import Utils
+import Workspaces
 
 prompt :: XPConfig
 prompt = defaultXPConfig { font = "xft:Monospace-12:narrow"
@@ -30,10 +31,13 @@ workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 
 workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
 
+-- | Just like 'withWorkspaces' but supply default workspace and key lists.
+withWorkspacesD :: ButtonMask -> (WorkspaceId -> WindowSet -> WindowSet) -> [((ButtonMask, KeySym), X ())]
+withWorkspacesD = withWorkspaces Constants.workspaces workspaceKeys
+
 layout = tiled ||| Full
   where
     tiled = Tall 1 (3/100) (2/3)
-
 
 printer = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                     , ppVisible         = xmobarColor "#d3d7cf" ""
