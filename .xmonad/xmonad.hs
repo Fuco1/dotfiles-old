@@ -60,6 +60,8 @@ main = do
                 , ("<XF86Sleep>", spawn "sudo pm-suspend")
                 , ("<Print>" <%> "<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("<Print>" <%> "u" <%> "<Print>", spawn "/home/matus/bin/take-screenshot noupload")
+                , (leader <%> "<f1>" <%> "<f1>", spawn "xfce4-settings-manager")
+                , (leader <%> "<f1>" <%> "<f2>", spawn "xfce4-appfinder")
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
