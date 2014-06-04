@@ -64,3 +64,5 @@ source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 # styles for main highlighter
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+
+bindkey -e '^w' kill-region
