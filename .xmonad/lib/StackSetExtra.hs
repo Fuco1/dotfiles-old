@@ -1,5 +1,10 @@
 module StackSetExtra
-       ( withScreen
+       ( currentTag
+       , onScreen
+       , isOnScreen
+       , wsTagToScreenId
+       , cmpByScreenId
+       , withScreen
        , withOtherScreen
        , shiftAndView
        , shiftAndViewAtOther
@@ -7,9 +12,27 @@ module StackSetExtra
        ) where
 
 import Control.Monad (liftM2)
-
+import Data.List (find)
+import Data.Maybe (fromJust)
+import Data.Ord (comparing)
 import XMonad
+
 import qualified XMonad.StackSet as W
+
+-- | Tag of workspace currently selected.
+currentTag = W.tag . W.workspace
+
+-- | Return list of workspaces which are visible.
+onScreen = liftM2 (:) W.current W.visible
+
+-- | True if workspace is visible.
+isOnScreen a w  = a `elem` map currentTag (onScreen w)
+
+-- | Convert workspace tag to screen id.
+wsTagToScreenId s x = W.screen $ fromJust $ find ((== x) . currentTag) s
+
+-- | Compare two workspaces by their screen id
+cmpByScreenId st = comparing (wsTagToScreenId $ onScreen st)
 
 -- | Modify the current window list with a pure function in context of a named
 -- screen, then refresh.  See also 'XMonad.Operations.windows'.
@@ -24,9 +47,8 @@ withScreen n f = screenWorkspace n >>= flip whenJust (windows . f)
 withOtherScreen :: (WorkspaceId -> WindowSet -> WindowSet) -> WindowSet -> WindowSet
 withOtherScreen f st = case W.visible st of
   []      -> st
-  [other] -> let ws = W.tag . W.workspace $ other in f ws st
+  [other] -> let ws = currentTag $ other in f ws st
   _       -> st
-
 
 -- | Shift the current active window to specified workspace, then select it on
 -- the current screen.

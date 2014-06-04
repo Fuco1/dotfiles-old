@@ -50,6 +50,7 @@ printer = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                     , ppLayout          = (:[]) . head
                     , ppOrder           = id
                     , ppExtras          = []
+                    , ppSort            = getSortByMyCompare
                     }
 
 manageHook = (composeOne . concat $
