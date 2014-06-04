@@ -88,18 +88,17 @@ main = do
                 ] `additionalKeys`
                 (
                   [((m .|. mod4Mask, k), windows $ f i)
-                | (i, k) <- zip C.workspaces workspaceKeys
+                | (i, k) <- zip C.workspaces C.workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
                   [((m .|. mod2Mask, k), windows $ f i)
-                | (i, k) <- zip C.workspaces workspaceKeys
+                | (i, k) <- zip C.workspaces C.workspaceKeys
                 , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
                   [((mod2Mask .|. controlMask, k), windows $ WX.shiftAndView i)
-                | (i, k) <- zip C.workspaces workspaceKeys ] ++
+                | (i, k) <- zip C.workspaces C.workspaceKeys ] ++
                   [((mod4Mask .|. mod2Mask, k), windows $ WX.shiftAndViewAtOther i)
-                | (i, k) <- zip C.workspaces workspaceKeys ]
+                | (i, k) <- zip C.workspaces C.workspaceKeys ]
                 )
          where
-           workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
            leader = "<Pause>"
 
 -- brno letisko LKTB

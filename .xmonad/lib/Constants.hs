@@ -28,6 +28,8 @@ workspaces :: [WorkspaceId]
 workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
               "q", "w", "e", "r"]
 
+workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
+
 layout = tiled ||| Full
   where
     tiled = Tall 1 (3/100) (2/3)
