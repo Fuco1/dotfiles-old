@@ -19,6 +19,7 @@ import qualified Constants as C
 import MPD
 import Utils
 import StackSetExtra as WX
+import Workspaces
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
@@ -87,16 +88,14 @@ main = do
                 , ("M4-B", broadcastMessage ToggleStruts >> refresh)
                 ] `additionalKeys`
                 (
-                  [((m .|. mod4Mask, k), windows $ f i)
-                | (i, k) <- zip C.workspaces C.workspaceKeys
-                , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
-                  [((m .|. mod2Mask, k), windows $ f i)
-                | (i, k) <- zip C.workspaces C.workspaceKeys
-                , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] ++
-                  [((mod2Mask .|. controlMask, k), windows $ WX.shiftAndView i)
-                | (i, k) <- zip C.workspaces C.workspaceKeys ] ++
-                  [((mod4Mask .|. mod2Mask, k), windows $ WX.shiftAndViewAtOther i)
-                | (i, k) <- zip C.workspaces C.workspaceKeys ]
+                  [ (mod2Mask,                   W.greedyView)
+                  , (mod4Mask,                   W.greedyView)
+                  , ((shiftMask .|. mod2Mask),   W.shift)
+                  , ((shiftMask .|. mod4Mask),   W.shift)
+                  , ((controlMask .|. mod2Mask), WX.shiftAndView)
+                  , ((mod4Mask .|. mod2Mask),    WX.shiftAndViewAtOther)
+                  ]
+                  >>= (uncurry withWorkspacesD)
                 )
          where
            leader = "<Pause>"

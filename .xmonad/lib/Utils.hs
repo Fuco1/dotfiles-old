@@ -7,7 +7,7 @@ module Utils
        ) where
 
 import Data.Char (toLower)
-import XMonad (spawn, X (..))
+import XMonad
 
 subseq :: Eq a => [a] -> [a] -> Bool
 []     `subseq` _      = True
