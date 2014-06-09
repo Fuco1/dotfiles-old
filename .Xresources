@@ -16,7 +16,7 @@ URxvt.perl-ext: default,matcher
 URxvt.url-launcher: opera
 URxvt.matcher.button: 3
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-URxvt.matcher.pattern.2: \\s`([^']+)'
+URxvt.matcher.pattern.2: (?<=\\s)`(?=\\w)([^']+)(?<=\\w)'
 URxvt.matcher.launcher.2: /home/matus/bin/emacs-show-docs $1
 URxvt.keysym.M-Delete: perl:matcher:list
 
