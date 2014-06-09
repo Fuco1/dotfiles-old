@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#TODO: if the $1 is a string ending in .el or .c, we should try to
+#find-file it instead
+emacsclient -e "(describe-function '$1)" >/dev/null
+
+# Local Variables:
+# mode: shell-script
+# End:
