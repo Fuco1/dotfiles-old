@@ -19,7 +19,7 @@ import Control.Arrow ((&&&))
 import Control.Monad (when, void, mapM_, (<=<), (>=>), ap, liftM)
 import Control.Monad.Trans (liftIO, lift)
 import Data.Function (on)
-import Data.List (elemIndex, isInfixOf, groupBy)
+import Data.List (elemIndex, isInfixOf, groupBy, nubBy)
 import Data.Maybe (fromJust, isJust)
 import Data.Map (lookup)
 import Network.MPD as M
@@ -37,6 +37,7 @@ import Utils
 data MPDPrompt = MPDPrompt String
 instance XPrompt MPDPrompt where
     showXPrompt (MPDPrompt s) = s ++ ": "
+    commandToComplete _ = id
 
 data Action = Clear | Add deriving (Show, Eq)
 
@@ -84,22 +85,38 @@ jumpToTrack = do
 
 trackCompl :: [Song] -> String -> IO [String]
 trackCompl choices pick = return mapped
-  where picked = filter (isInfixOf pick . strToLower . getName) choices
+  where multiArtist = case nubBy ((==) `on` getArtist) choices of
+          a:b:_ -> True
+          _     -> False
+        picked = filter (matchAllWords pick . strToLower . formatSong) choices
         grouped = groupBy ((==) `on` strToLower . getName) picked
         mapped = grouped >>= (\x -> case x of
-                                 [a] -> [indexify a]
-                                 xs  -> map (\v -> indexify v ++ " [" ++ getAlbum v ++ "]") xs)
-        getName (Song { sgFilePath = Path path
-                      , sgTags = tags })
-          = case lookup Title tags of
-              Just [Value x] -> C.unpack x
-              Nothing          -> C.unpack path
-        getAlbum (Song { sgTags = tags })
-          = case lookup Album tags of
-              Just [Value x] -> C.unpack x
-              Nothing          -> ""
-        getIndex (Song { sgIndex = Just index }) = show index
+                                 [s] -> [formatSong s]
+                                 xs  -> map (\s -> formatSong s <%> "[" ++ getAlbum s ++ "]") xs)
         indexify = uncurry (++) . (flip (++) ": " . getIndex &&& getName)
+        formatSong s = indexify s ++
+                       (if (multiArtist && getArtist s /= "")
+                        then " <" ++ getArtist s ++ ">"
+                        else "")
+
+---------------------------------------- song tags getters
+getName (Song { sgFilePath = Path path
+              , sgTags = tags })
+  = case lookup Title tags of
+  Just [Value x] -> C.unpack x
+  Nothing        -> C.unpack path
+
+getAlbum (Song { sgTags = tags })
+  = case lookup Album tags of
+  Just [Value x] -> C.unpack x
+  Nothing        -> ""
+
+getIndex (Song { sgIndex = Just index }) = show index
+
+getArtist (Song { sgTags = tags })
+  = case lookup Artist tags of
+  Just [Value x] -> C.unpack x
+  Nothing        -> ""
 
 ---------------------------------------- getting data
 askPrompt :: String -> [String] -> X (Maybe String)
