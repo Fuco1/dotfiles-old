@@ -84,7 +84,7 @@ Anki/*
 Calibre Library/*
 __sync/*
 dev/*
-downloads/*
+download/*
 drill/*
 mnsymbol/*
 media/*
@@ -108,3 +108,5 @@ screens/*
 /.aspell.en.prepl
 /.nvidia-settings-rc
 /languages/
+/.jhistory
+/mfput.log
