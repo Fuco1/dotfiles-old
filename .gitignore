@@ -110,3 +110,11 @@ screens/*
 /languages/
 /.jhistory
 /mfput.log
+/.config/mpd/state
+/.config/mpd/sticker.sql
+/.config/mpd/tag_cache
+/.config/mpd/playlists/*
+/.config/mpd/.config/*
+/.config/pavucontrol.ini
+/.config/mpd/mpd.log
+/.config/mpd/pid
