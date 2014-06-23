@@ -6,10 +6,13 @@ module Utils
        , strToLower
        , recompileXMonad
        , (<%>)
+       , notifySend
        ) where
 
+import Control.Monad (void)
 import Data.Char (toLower)
 import Data.List (and, isInfixOf)
+import System.Process (readProcess)
 import XMonad
 
 subseq :: Eq a => [a] -> [a] -> Bool
@@ -36,3 +39,9 @@ recompileXMonad = spawn "if type xmonad; then xmonad --recompile && xmonad --res
 infixr 6 <%>
 (<%>) :: String -> String -> String
 (<%>) = ((++) . (flip (++) " "))
+
+notifySend :: Int -> String -> String -> IO ()
+notifySend timeout title msg =
+  void $ readProcess "notify-send" ["-u", "low", "-t", show (timeout * 1000), title, msg] ""
+
+-- TODO: add submap support
