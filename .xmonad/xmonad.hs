@@ -20,6 +20,7 @@ import MPD
 import Utils
 import StackSetExtra as WX
 import Workspaces
+import PulseAudio
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
@@ -59,6 +60,7 @@ main = do
                 , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 3%+")
                 , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 3%-")
                 , ("<XF86AudioMute>",        spawn "amixer -q -D pulse sset Master toggle")
+                , (leader <%> "m", muteSinkInput)
                 , (leader <%> "<Insert>",    spawn "amixer -q -D pulse sset Master toggle")
                 , (leader <%> "<F7>",        spawn "/home/matus/bin/toggle-touchpad")
                 , ("<XF86Sleep>", spawn "sudo pm-suspend")
