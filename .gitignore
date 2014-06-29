@@ -119,3 +119,4 @@ screens/*
 /.config/mpd/mpd.log
 /.config/mpd/pid
 /.config/fish/generated_completions/*
+/.config/fish/fish_history
