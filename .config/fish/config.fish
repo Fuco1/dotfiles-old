@@ -1,0 +1,42 @@
+# ls aliases
+alias ll "ls -l --group-directories-first"
+alias la "ls -A --group-directories-first"
+alias lla "ls -lA --group-directories-first"
+alias lle "ll --color-never | le"
+alias lg "ls -lA | grep -i "
+
+# navigation
+alias .. "cd .."
+alias ... "cd ../.."
+alias .... "cd ../../.."
+alias ..... "cd ../../../.."
+alias ...... "cd ../../../../.."
+
+# text viewers/editors
+alias le "less -MN"
+
+# directory commands
+alias ds "du -sm"
+alias du1 "du -h --max-depth 1"
+alias mc "mc -S fuco"
+
+# archives
+alias untar "tar xvfz"
+
+# ssh
+alias dasnet "TERM xterm-256color ssh fuco@dasnet.cz"
+
+# app installation
+alias ins "sudo apt-get install"
+alias agr "sudo apt-get remove"
+alias acs "sudo apt-cache search"
+
+# general
+alias ta "tmux attach"
+alias grep "pcregrep --color=auto"
+alias yd "youtube-dl"
+
+# bindings
+function fish_user_key_bindings
+  bind \eg my_fish_grep
+end

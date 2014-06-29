@@ -118,3 +118,4 @@ screens/*
 /.config/pavucontrol.ini
 /.config/mpd/mpd.log
 /.config/mpd/pid
+/.config/fish/generated_completions/*
