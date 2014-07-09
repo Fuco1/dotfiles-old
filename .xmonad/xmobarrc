@@ -3,7 +3,7 @@ Config { font = "xft:Monospace-8:narrow"
        , bgColor = "black"
        , fgColor = "#888a85"
        , position = Top
-       , commands = [ Run Weather "LKTB" ["-t","<tempC>","-L","64","-H","77",
+       , commands = [ Run Weather "LZSL" ["-t","<tempC>","-L","64","-H","77",
                                           "--normal","#8ae234","--high","#ef2929","--low","#8cc4ff"] 36000
                     , Run MultiCpu ["-t", "<total0>|<total1>", "-p", "2", "-L","10","-H","50","--normal","#8ae234","--high","#ef2929"] 10
                     , Run Memory ["-t","<usedratio>%","-p", "2"] 10
@@ -17,11 +17,11 @@ Config { font = "xft:Monospace-8:narrow"
                                                      "-C", "#8ae234", "-c", "#ef2929",
                                                      "-O", "<fc=#8ae234>", "-o", "<fc=#ef2929>"
                                                      ] 10
-                    , Run Com "/home/matus/bin/emacs-active-task" [] "active-task" 50
+                    , Run Com "/home/matus/bin/emacs-status" [] "emacs-status" 50
                     , Run BatteryP ["BAT1"] ["-t", "<left>", "--", "-l", "red", "-m", "blue", "-h", "green"] 60
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %mpd%│%default:Master%│%battery%│%multicpu%|%coretemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%active-task%│%LKTB%"
+       , template = "%StdinReader% }{ %mpd%│%default:Master%│%battery%│%multicpu%|%coretemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%emacs-status%│%LZSL%"
        }
