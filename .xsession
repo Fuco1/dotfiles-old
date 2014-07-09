@@ -1,7 +1,6 @@
 #xfce4-session
 #!/usr/bin/env bash
 
-xmodmap ~/.xmodmap
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 # autocutsel -fork &
