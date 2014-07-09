@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+cd "$HOME/.getmail/"
+rcfiles=""
+for file in rc-* ; do
+  rcfiles="$rcfiles --rcfile $file"
+done
+/usr/bin/getmail $rcfiles $@
+/usr/local/bin/notmuch new
