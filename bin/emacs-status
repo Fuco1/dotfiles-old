@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-emacsclient -e "(my-org-status)" | tr -d "\""
+emacsclient -e "(my-emacs-status)" | tr -d "\""
 
 # Local Variables:
 # mode: shell-script
