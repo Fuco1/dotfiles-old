@@ -23,6 +23,7 @@ if [ ! -f ~/.mpd/pid ] ; then
     mpd
 fi
 
+mountavfs
 feh --bg-scale '/home/matus/media/pictures/haskell.png'
 
 bash /home/matus/.inputsetup
