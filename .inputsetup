@@ -4,7 +4,7 @@
 setxkbmap -option ctrl:swapcaps
 
 # set up the modifiers
-xmodmap .xmodmap
+xmodmap ~/.xmodmap
 
 # mouse setup
 mouseid=$(xinput | /bin/grep OPTICAL | cut -f 2 | sed s/id=//)
