@@ -1,3 +1,12 @@
+# exports
+set -x PATH "$HOME/.cabal/bin" "$HOME/.cask/bin" "$HOME/bin" $PATH
+set -x EDITOR "emacs -nw"
+set -x VISUAL "/home/matus/bin/ecedit"
+set -x XDG_CONFIG_HOME "/home/matus/.config"
+set -x TEXMFHOME "/home/matus/texmf"
+set -x GPG_TTY (tty)
+set -x MAIL "$HOME/Maildir"
+
 # ls aliases
 alias ll "ls -l --group-directories-first"
 alias la "ls -A --group-directories-first"
@@ -40,9 +49,3 @@ alias yd "youtube-dl"
 function fish_user_key_bindings
   bind \eg my_fish_grep
 end
-
-set -x PATH "$HOME/.cabal/bin" "$HOME/.cask/bin" "$HOME/bin" $PATH
-set -x EDITOR "emacs -nw"
-set -x VISUAL "/home/matus/bin/ecedit"
-set -x XDG_CONFIG_HOME "/home/matus/.config"
-set -x TEXMFHOME "/home/matus/texmf"
