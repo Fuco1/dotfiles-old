@@ -64,6 +64,7 @@
 .gtkrc-xfce
 .histfile
 .icedtea/*
+.irssi/config
 .java/*
 .jhistory
 .lesshst
@@ -82,6 +83,7 @@
 .opera_mail/*
 .opera_temp/*
 .pki/*
+.rnd
 .screenlayout/generated-by-arandr
 .slime/*
 .slocdata/*
@@ -89,6 +91,7 @@
 .ssh/*
 .ssr/*
 .subversion/*
+.tagsistant/*
 .texmf-var/*
 .thumbnails/*
 .viminfo*
@@ -102,6 +105,7 @@
 .xmonad/lib/*.o
 .xmonad/xmonad-x86_64-linux
 .xmonad/xmonad.errors
+.xsel.log
 .xsession-errors
 .zcompdump
 .zsh_histfile
@@ -115,6 +119,9 @@ books.html
 dev/*
 download/*
 drill/*
+files/*
+games/*
+gmon.out
 installed-packages.txt
 languages/
 languages/*
@@ -126,7 +133,9 @@ org/*
 passwords.txt
 pictures/*
 playlist-radia
+progs/*
 quicklisp/*
+saved_colors
 screens/*
 script/*
 secrets/*
