@@ -23,6 +23,8 @@ if [ ! -f ~/.mpd/pid ] ; then
     mpd
 fi
 
+eval $(gpg-agent --daemon)
+
 mountavfs
 feh --bg-scale '/home/matus/media/pictures/haskell.png'
 
