@@ -24,6 +24,11 @@ alias ...... "cd ../../../../.."
 # text viewers/editors
 alias le "less -MN"
 
+# processes
+alias psef='ps -ef'
+alias psg='ps -ef | grep '
+alias topu="top -u $USER"
+
 # directory commands
 alias ds "du -sm"
 alias du1 "du -h --max-depth 1"
@@ -33,7 +38,7 @@ alias mc "mc -S fuco"
 alias untar "tar xvfz"
 
 # ssh
-alias dasnet "TERM xterm-256color ssh fuco@dasnet.cz"
+alias dasnet "ssh fuco@dasnet.cz"
 
 # app installation
 alias ins "sudo apt-get install"
