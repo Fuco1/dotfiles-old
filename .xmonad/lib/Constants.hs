@@ -60,6 +60,9 @@ manageHook = (composeOne . concat $
     , [ className =? c -?> doFloat | c <- myCFloats ]
     , [ title     =? t -?> doFloat | t <- myTFloats ]
     , [ resource  =? r -?> doFloat | r <- myRFloats ]
+    , [ className =? c -?> doIgnore | c <- myCIgnores ]
+    , [ title     =? t -?> doIgnore | t <- myTIgnores ]
+    , [ resource  =? r -?> doIgnore | r <- myRIgnores ]
     , [ className =? "Xfce4-notifyd" -?> doIgnore <+> doF copyToAll ]
     ])
     <+> manageDocks
@@ -68,3 +71,6 @@ manageHook = (composeOne . concat $
         myCFloats = []
         myTFloats = ["GLFW-b-demo"]
         myRFloats = []
+        myCIgnores = []
+        myTIgnores = []
+        myRIgnores = []
