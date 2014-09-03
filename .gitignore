@@ -24,9 +24,11 @@
 .config/fish/fish_history
 .config/fish/fishd.201a06ddd68a
 .config/fish/generated_completions/*
+.config/google-googletalkplugin/*
 .config/gtk-2.0/*
 .config/gtk-3.0/*
 .config/htop/htoprc
+.config/libreoffice/*
 .config/menus
 .config/mpd/.config/*
 .config/mpd/mpd.log
@@ -71,12 +73,15 @@
 .linuxmint/mintWelcome/norun.flag
 .local/*
 .lyrics/*
+.m2/*
 .macromedia/*
 .mozilla/*
 .mpd/*
 .nano_history
+.nbi/*
 .ncmpcpp/error.log
 .ncmpcpp/patterns.list
+.netbeans/*
 .nv/*
 .nvidia-settings-rc
 .opera/*
