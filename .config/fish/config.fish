@@ -6,6 +6,8 @@ set -x XDG_CONFIG_HOME "/home/matus/.config"
 set -x TEXMFHOME "/home/matus/texmf"
 set -x GPG_TTY (tty)
 set -x MAIL "$HOME/Maildir"
+# to unconfuse AWT about Xmonad
+set -x _JAVA_AWT_WM_NONREPARENTING 1
 
 # ls aliases
 alias ll "ls -l --group-directories-first"
