@@ -1,5 +1,5 @@
 # exports
-set -x PATH "$HOME/.cabal/bin" "$HOME/.cask/bin" "$HOME/bin" $PATH
+set -x PATH "/opt/netbeans-8.0/bin" "$HOME/.cabal/bin" "$HOME/.cask/bin" "$HOME/bin" $PATH
 set -x EDITOR "emacs -nw"
 set -x VISUAL "/home/matus/bin/ecedit"
 set -x XDG_CONFIG_HOME "/home/matus/.config"
@@ -55,4 +55,8 @@ alias yd "youtube-dl"
 # bindings
 function fish_user_key_bindings
   bind \eg my_fish_grep
+end
+
+function runjava
+  javac -cp "guava-17.0.jar" "$argv[1].java"; and java -ea -cp "guava-17.0.jar:." "$argv[1]"
 end
