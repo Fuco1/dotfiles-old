@@ -499,8 +499,8 @@ def_key "h"
 #def_key "G"
 #  jump_to_playlist_editor
 #
-#def_key "~"
-#  jump_to_media_library
+def_key "L"
+  jump_to_media_library
 #
 #def_key "E"
 #  jump_to_tag_editor
