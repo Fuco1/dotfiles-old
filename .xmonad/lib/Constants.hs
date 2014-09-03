@@ -68,7 +68,7 @@ manageHook = (composeOne . concat $
     <+> manageDocks
     <+> XMonad.manageHook defaultConfig
     where
-        myCFloats = []
+        myCFloats = ["sun-awt-X11-XFramePeer", "net-sourceforge-jnlp-runtime-Boot"]
         myTFloats = ["GLFW-b-demo"]
         myRFloats = []
         myCIgnores = []
