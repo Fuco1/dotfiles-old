@@ -5,10 +5,10 @@ Config { font = "xft:Monospace-8:narrow"
        , position = Top
        , commands = [ Run Weather "LZSL" ["-t","<tempC>","-L","64","-H","77",
                                           "--normal","#8ae234","--high","#ef2929","--low","#8cc4ff"] 36000
-                    , Run MultiCpu ["-t", "<total0>|<total1>", "-p", "2", "-L","10","-H","50","--normal","#8ae234","--high","#ef2929"] 10
+                    , Run MultiCpu ["-t", "<total0>,<total1>", "-p", "2", "-L","10","-H","50","--normal","#8ae234","--high","#ef2929"] 10
                     , Run Memory ["-t","<usedratio>%","-p", "2"] 10
                     , Run Date "%a%d%b%H:%M:%S" "date" 10
-                    , Run CoreTemp ["-t", "<core0>|<core1>",
+                    , Run CoreTemp ["-t", "<core0>,<core1>",
                                     "-L", "40", "-H", "60",
                                     "-l", "lightblue", "-n", "gray90", "-h", "red"] 20
                     , Run MPD ["-t", "<fc=#888a85><title></fc><fc=#729fcf><artist></fc><statei><lapsed>/<length>,<volume>" ,
@@ -23,5 +23,5 @@ Config { font = "xft:Monospace-8:narrow"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %mpd%│%default:Master%│%battery%│%multicpu%|%coretemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%emacs-status%│%LZSL%"
+       , template = "%StdinReader% }{ %mpd%│%default:Master%│%battery%│%multicpu%,%coretemp%│%memory%│<fc=#ad7fa8>%date%</fc>│%emacs-status%│%LZSL%"
        }
