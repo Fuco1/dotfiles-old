@@ -11,7 +11,7 @@ Config { font = "xft:Monospace-8:narrow"
                     , Run CoreTemp ["-t", "<core0>|<core1>",
                                     "-L", "40", "-H", "60",
                                     "-l", "lightblue", "-n", "gray90", "-h", "red"] 20
-                    , Run MPD ["-t", "<fc=#888a85><title></fc><fc=#729fcf><artist></fc><statei><lapsed>/<length>" ,
+                    , Run MPD ["-t", "<fc=#888a85><title></fc><fc=#729fcf><artist></fc><statei><lapsed>/<length>,<volume>" ,
                               "--", "-P", "<fc=#8ae234>>></fc>", "-Z", "<fc=#edd400>||</fc>", "-S", "<fc=#ef2929>XX</fc>"] 10
                     , Run Volume "default" "Master" ["-t", "<status><volume></fc>", "--",
                                                      "-C", "#8ae234", "-c", "#ef2929",
