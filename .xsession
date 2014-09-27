@@ -26,8 +26,9 @@ fi
 eval $(gpg-agent --daemon)
 
 mountavfs
+tagsistant "/home/matus/files"
 feh --bg-scale '/home/matus/media/pictures/haskell.png'
 
 bash /home/matus/.inputsetup
-sh /home/matus/.screenlayout/brno.sh
+sh /home/matus/.screenlayout/doma.sh
 exec /usr/bin/xmonad
