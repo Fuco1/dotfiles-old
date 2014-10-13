@@ -69,12 +69,14 @@
 .irssi/config
 .java/*
 .jhistory
+.kkcrc
 .lesshst
 .linuxmint/mintWelcome/norun.flag
 .local/*
 .lyrics/*
 .m2/*
 .macromedia/*
+.malabar_mode/*
 .mozilla/*
 .mpd/*
 .nano_history
@@ -87,6 +89,7 @@
 .opera/*
 .opera_mail/*
 .opera_temp/*
+.pip/*
 .pki/*
 .rnd
 .screenlayout/generated-by-arandr
