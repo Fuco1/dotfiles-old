@@ -76,10 +76,10 @@ main = do
                 , ("M2-p", runOrRaisePrompt C.prompt)
                 , (leader <%> leader, windowPromptGoto C.prompt)
                 , ("M2-c", kill)
-                , ("M2-,", withScreen 0 W.view)
-                , ("M2-.", withScreen 1 W.view)
-                , ("M2-S-,", withScreen 0 W.shift)
-                , ("M2-S-.", withScreen 1 W.shift)
+                , ("M2-,", withScreen main W.view)
+                , ("M2-.", withScreen aux W.view)
+                , ("M2-S-,", withScreen main W.shift)
+                , ("M2-S-.", withScreen aux W.shift)
                 , ("M2-/", windows WX.shiftToOtherScreen)
                 , ("M4-p", windows W.focusDown)
                 , ("M4-n", windows W.focusUp)
@@ -103,6 +103,8 @@ main = do
                 )
          where
            leader = "<Pause>"
+           main = 0
+           aux = 1
 
 -- brno letisko LKTB
 -- sliac letisko LZSL
