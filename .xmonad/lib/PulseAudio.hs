@@ -25,7 +25,7 @@ data SinkInput = SinkInput { index :: Int
 
 data MuteCmd = Mute | Unmute | Toggle deriving (Show, Eq)
 
-withSinks :: String -> (Maybe SinkInput -> X ()) -> X ()
+withSinks :: String -> (SinkInput -> X ()) -> X ()
 withSinks prompt action = do
   inputs <- liftIO $ getSinkInputs
   case inputs of
@@ -37,7 +37,9 @@ withSinks prompt action = do
                    Just "" -> Just $ head sinks
                    Just x -> find ((==) x . name) sinks
                    Nothing -> Nothing
-      action sink
+      case sink of
+        Just s -> action s
+        _ -> return ()
 
 sinkCompletionFunc :: [SinkInput] -> String -> IO [String]
 sinkCompletionFunc sinks pick = return $ map name picked
@@ -50,14 +52,9 @@ sinkPicker sinks prompt = mkXPromptWithReturn
                           (sinkCompletionFunc sinks)
                           return
 
-mute :: Maybe SinkInput -> X ()
-mute sink = do
-  case sink of
-   Just s -> liftIO $ pacmdMute s Toggle
-   _ -> return ()
-
 muteSinkInput :: X ()
-muteSinkInput = withSinks "Mute sink" mute
+muteSinkInput =
+  withSinks "Mute sink" (\sink -> liftIO $ pacmdMute sink Toggle)
 
 
 
