@@ -86,8 +86,15 @@ sink = do
   manyTill anyChar (try (string "muted: "))
   muted <- yesno
   manyTill anyChar (try (string "application.name = \""))
-  name <- manyTill anyChar (try (char '"'))
+  name <- alsaPluginName <|> manyTill anyChar (try (char '"'))
   return $ SinkInput index name muted
+
+alsaPluginName :: Parser String
+alsaPluginName = do
+  manyTill anyChar (try (char '['))
+  name <- manyTill anyChar (try (char ']'))
+  manyTill anyChar (try (char '"'))
+  return name
 
 sinkInput :: Parser [SinkInput]
 sinkInput = do
