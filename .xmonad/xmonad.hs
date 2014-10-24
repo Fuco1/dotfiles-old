@@ -33,7 +33,7 @@ main = do
                 , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook
                 , modMask            = mod4Mask
                 , borderWidth        = 1
-                , terminal           = "urxvtc -e fish"
+                , terminal           = "urxvtc"
                 , normalBorderColor  = "#000000"
                 , focusedBorderColor = "#008800"
                 , workspaces         = C.workspaces
@@ -65,6 +65,7 @@ main = do
                 , (leader <%> "v", setVolumeSinkInput)
                 , (leader <%> "<Insert>",    spawn "amixer -q -D pulse sset Master toggle")
                 , (leader <%> "<F7>",        spawn "/home/matus/bin/toggle-touchpad")
+                , ("M4-S-<Return>", runInTerm "" "fish")
                 , ("<XF86Sleep>", spawn "sudo pm-suspend")
                 , ("<Print>" <%> "<Print>", spawn "/home/matus/bin/take-screenshot")
                 , ("<Print>" <%> "u" <%> "<Print>", spawn "/home/matus/bin/take-screenshot noupload")
