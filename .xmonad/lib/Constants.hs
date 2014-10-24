@@ -71,6 +71,7 @@ manageHook = (composeOne . concat $
     , [ className =? c -?> doIgnore | c <- myCIgnores ]
     , [ title     =? t -?> doIgnore | t <- myTIgnores ]
     , [ resource  =? r -?> doIgnore | r <- myRIgnores ]
+    , [ resource  =? r -?> doShift "0" | r <- ["alsamixer", "pacmixer", "ncmpcpp"]]
     , [ className =? "Xfce4-notifyd" -?> doIgnore <+> doF copyToAll ]
     ])
     <+> manageDocks

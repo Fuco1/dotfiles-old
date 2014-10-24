@@ -12,7 +12,7 @@ import XMonad.Hooks.UrgencyHook (withUrgencyHook, NoUrgencyHook (..))
 import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
 import XMonad.Prompt.Window (windowPromptGoto)
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
-import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Run (spawnPipe, runInTerm)
 import qualified XMonad.StackSet as W
 
 import qualified Constants as C
@@ -71,6 +71,9 @@ main = do
                 , ("<Print>" <%> "u" <%> "<Print>", spawn "/home/matus/bin/take-screenshot noupload")
                 , (leader <%> "<F1>" <%> "<F1>", spawn "xfce4-settings-manager")
                 , (leader <%> "<F1>" <%> "<F2>", spawn "xfce4-appfinder")
+                , (leader <%> "=" <%> "a", runInTermOrRaise "alsamixer" "0")
+                , (leader <%> "=" <%> "p", runInTermOrRaise "pacmixer" "0")
+                , (leader <%> "=" <%> "n", runInTermOrRaise "ncmpcpp" "0")
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
