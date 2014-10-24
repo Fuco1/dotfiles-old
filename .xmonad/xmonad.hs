@@ -6,10 +6,9 @@ import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.CycleWindows (cycleRecentWindows)
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, ppOutput)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsStartup, fullscreenEventHook)
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, ToggleStruts (..))
+import XMonad.Hooks.ManageDocks (docksEventHook, ToggleStruts (..))
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.UrgencyHook (withUrgencyHook, NoUrgencyHook (..))
-import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
 import XMonad.Prompt.Window (windowPromptGoto)
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
@@ -28,7 +27,7 @@ main = do
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = C.manageHook
-                , layoutHook         = avoidStruts $ smartBorders C.layout
+                , layoutHook         = C.layout
                 , startupHook        = ewmhDesktopsStartup >> setWMName "LG3D"
                 , logHook            = dynamicLogWithPP C.printer { ppOutput = hPutStrLn xmproc }
                 , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook

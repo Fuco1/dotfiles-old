@@ -1,11 +1,15 @@
+{-# LANGUAGE NoMonomorphismRestriction #-}
 module Constants where
 
 import XMonad
 import XMonad.Actions.CopyWindow (copyToAll)
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.Drawer
+import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.ResizeScreen
 import XMonad.Prompt
 import XMonad.Util.Loggers
 
@@ -35,9 +39,14 @@ workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
 withWorkspacesD :: ButtonMask -> (WorkspaceId -> WindowSet -> WindowSet) -> [((ButtonMask, KeySym), X ())]
 withWorkspacesD = withWorkspaces Constants.workspaces workspaceKeys
 
-layout = tiled ||| Full
+--avoidStruts $ smartBorders
+layout = mixerdrawer `onTop` as (Full ||| tiled)
   where
+    mixerdrawer = drawer 0 0.4
+                  (foldl1 Or . map Resource $ ["alsamixer", "pacmixer", "ncmpcpp"])
+                  (Tall 0 0 0)
     tiled = Tall 1 (3/100) (2/3)
+    as = avoidStruts . smartBorders
 
 printer = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                     , ppVisible         = xmobarColor "#d3d7cf" ""
