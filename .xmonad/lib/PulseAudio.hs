@@ -19,26 +19,40 @@ data PAPrompt = PAPrompt String
 instance XPrompt PAPrompt where
     showXPrompt (PAPrompt s) = s ++ ": "
 
-muteSinkInput :: X ()
-muteSinkInput = do
+withSinks :: String -> (Maybe SinkInput -> X ()) -> X ()
+withSinks prompt action = do
   inputs <- liftIO $ getSinkInputs
   case inputs of
     Left x -> liftIO $ notifySend 5 "Error" $ show x
     Right [] -> liftIO $ notifySend 5 "Error" $ "No sinks available."
     Right sinks -> do
-      pick <- mkXPromptWithReturn
-              (PAPrompt "Mute sink input")
-              Constants.prompt
-              (compl sinks)
-              return
-      case pick of
-        Just "" -> liftIO $ pacmdMute (head sinks) Toggle
-        Just x -> do
-          let Just sink = find ((==) x . name) sinks
-          liftIO $ pacmdMute sink Toggle
-        _ -> return ()
-  where compl sinks pick = return $ map name picked
-          where picked = filter (matchAllWords pick . strToLower . name) sinks
+      pick <- sinkPicker sinks prompt
+      let sink = case pick of
+                   Just "" -> Just $ head sinks
+                   Just x -> find ((==) x . name) sinks
+                   Nothing -> Nothing
+      action sink
+
+sinkCompletionFunc :: [SinkInput] -> String -> IO [String]
+sinkCompletionFunc sinks pick = return $ map name picked
+  where picked = filter (matchAllWords pick . strToLower . name) sinks
+
+sinkPicker :: [SinkInput] -> String -> X (Maybe String)
+sinkPicker sinks prompt = mkXPromptWithReturn
+                          (PAPrompt prompt)
+                          Constants.prompt
+                          (sinkCompletionFunc sinks)
+                          return
+
+mute :: Maybe SinkInput -> X ()
+mute sink = do
+  case sink of
+   Just s -> liftIO $ pacmdMute s Toggle
+   _ -> return ()
+
+muteSinkInput :: X ()
+muteSinkInput = withSinks "Mute sink" mute
+
 
 data MuteCmd = Mute | Unmute | Toggle deriving (Show, Eq)
 
