@@ -19,6 +19,12 @@ data PAPrompt = PAPrompt String
 instance XPrompt PAPrompt where
     showXPrompt (PAPrompt s) = s ++ ": "
 
+data SinkInput = SinkInput { index :: Int
+                           , name :: String
+                           , muted :: Bool } deriving (Show)
+
+data MuteCmd = Mute | Unmute | Toggle deriving (Show, Eq)
+
 withSinks :: String -> (Maybe SinkInput -> X ()) -> X ()
 withSinks prompt action = do
   inputs <- liftIO $ getSinkInputs
@@ -54,11 +60,6 @@ muteSinkInput :: X ()
 muteSinkInput = withSinks "Mute sink" mute
 
 
-data MuteCmd = Mute | Unmute | Toggle deriving (Show, Eq)
-
-data SinkInput = SinkInput { index :: Int
-                           , name :: String
-                           , muted :: Bool } deriving (Show)
 
 -- | index, mute cmd
 pacmdMute :: SinkInput -> MuteCmd -> IO ()
