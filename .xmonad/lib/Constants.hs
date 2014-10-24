@@ -39,11 +39,10 @@ workspaceKeys = [xK_1 .. xK_9] ++ [xK_0, xK_q, xK_w, xK_e, xK_r]
 withWorkspacesD :: ButtonMask -> (WorkspaceId -> WindowSet -> WindowSet) -> [((ButtonMask, KeySym), X ())]
 withWorkspacesD = withWorkspaces Constants.workspaces workspaceKeys
 
---avoidStruts $ smartBorders
-layout = mixerdrawer `onTop` as (Full ||| tiled)
+layout = mixerdrawer `onBottom` as (Full ||| tiled)
   where
-    mixerdrawer = drawer 0 0.4
-                  (foldl1 Or . map Resource $ ["alsamixer", "pacmixer", "ncmpcpp"])
+    mixerdrawer = drawer 0 0.5
+                  (foldl1 Or . map Resource $ ["alsamixer", "pacmixer"])
                   (Tall 0 0 0)
     tiled = Tall 1 (3/100) (2/3)
     as = avoidStruts . smartBorders
