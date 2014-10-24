@@ -13,6 +13,7 @@
 .cache/*
 .calibre_calibre GUI.lock
 .cask/
+.config/Pinta/
 .config/Thunar/*
 .config/Trolltech.conf
 .config/Undertype/fontmatrix.conf
@@ -30,6 +31,7 @@
 .config/htop/htoprc
 .config/libreoffice/*
 .config/menus
+.config/mono.addins/
 .config/mpd/.config/*
 .config/mpd/mpd.log
 .config/mpd/pid
@@ -59,6 +61,7 @@
 .gconf/*
 .getmail/*
 .ghc/*
+.gksu.lock
 .gnome2/*
 .gnupg/*
 .gstreamer-0.10/*
@@ -121,6 +124,7 @@
 270px-Emacs-logo.svg.png
 Anki/*
 Calibre Library/*
+GNUstep/
 Maildir/*
 __sync/*
 books.html
