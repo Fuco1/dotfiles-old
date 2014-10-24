@@ -1,5 +1,6 @@
 module PulseAudio
        ( muteSinkInput
+       , setVolumeSinkInput
        ) where
 
 import Control.Monad.Trans (liftIO)
@@ -56,7 +57,19 @@ muteSinkInput :: X ()
 muteSinkInput =
   withSinks "Mute sink" (\sink -> liftIO $ pacmdMute sink Toggle)
 
+setVolume :: SinkInput -> X ()
+setVolume sink = do
+  volume <- mkXPromptWithReturn
+              (PAPrompt "Volume")
+              Constants.prompt
+              (mkComplFunFromList $ map show [0..100])
+              return
+  liftIO $ case volume of
+             Just v -> pacmdSetVolume sink v
+             _ -> pacmdMute sink Toggle
 
+setVolumeSinkInput :: X ()
+setVolumeSinkInput = withSinks "Select sink" setVolume
 
 -- | index, mute cmd
 pacmdMute :: SinkInput -> MuteCmd -> IO ()
@@ -66,6 +79,10 @@ pacmdMute sink cmd = do
         Unmute -> 0
         Toggle -> let m = muted sink in if m then 0 else 1
   safeSpawn "pacmd" ["set-sink-input-mute", show $ index sink, show toggle]
+
+pacmdSetVolume :: SinkInput -> String -> IO ()
+pacmdSetVolume sink level = do
+  safeSpawn "pactl" ["set-sink-input-volume", show $ index sink, level ++ "%"]
 
 ----------------------------------------
 -- parsing of the "pacmd" output... blerg
