@@ -32,6 +32,7 @@ withSinks prompt action = do
   case inputs of
     Left x -> liftIO $ notifySend 5 "Error" $ show x
     Right [] -> liftIO $ notifySend 5 "Error" $ "No sinks available."
+    Right [s] -> action s
     Right sinks -> do
       pick <- sinkPicker sinks prompt
       let sink = case pick of
