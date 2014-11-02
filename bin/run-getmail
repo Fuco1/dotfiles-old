@@ -7,4 +7,5 @@ for file in rc-* ; do
   rcfiles="$rcfiles --rcfile $file"
 done
 /usr/bin/getmail $rcfiles $@
+/usr/bin/offlineimap
 /usr/local/bin/notmuch new
