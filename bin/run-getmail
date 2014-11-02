@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-cd "$HOME/.getmail/"
-rcfiles=""
-for file in rc-* ; do
-  rcfiles="$rcfiles --rcfile $file"
-done
-/usr/bin/getmail $rcfiles $@
-/usr/bin/offlineimap
-/usr/local/bin/notmuch new
+mbsync logio
+mbsync goljer
+mbsync dota
+notmuch new
