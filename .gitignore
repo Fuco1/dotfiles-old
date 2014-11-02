@@ -82,6 +82,8 @@
 .malabar_mode/*
 .mozilla/*
 .mpd/*
+.mplayer/
+.mysql_history
 .nano_history
 .nbi/*
 .ncmpcpp/error.log
@@ -89,6 +91,7 @@
 .netbeans/*
 .nv/*
 .nvidia-settings-rc
+.offlineimap/
 .opera/*
 .opera_mail/*
 .opera_temp/*
@@ -102,6 +105,7 @@
 .ssh/*
 .ssr/*
 .subversion/*
+.swipl-dir-history/
 .tagsistant/*
 .texmf-var/*
 .thumbnails/*
@@ -154,5 +158,6 @@ secrets/*
 skola/*
 sources/*
 stuff/*
+test/
 texmf/*
 xterm-colortest
