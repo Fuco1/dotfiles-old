@@ -8,6 +8,7 @@ set -x GPG_TTY (tty)
 set -x MAIL "$HOME/Maildir"
 # to unconfuse AWT about Xmonad
 set -x _JAVA_AWT_WM_NONREPARENTING 1
+set -x GPG_TTY (tty)
 
 # ls aliases
 alias ll "ls -l --group-directories-first"
