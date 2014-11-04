@@ -24,6 +24,15 @@ import PulseAudio
 
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
+       w <- readFile "/home/matus/.whereami"
+       let main = case w of
+                   "brno" -> 0
+                   "home" -> 1
+                   _ -> 0
+       let aux = case w of
+                  "brno" -> 0
+                  "home" -> 1
+                  _ -> 1
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = C.manageHook
@@ -107,8 +116,6 @@ main = do
                 )
          where
            leader = "<Pause>"
-           main = 0
-           aux = 1
 
 -- brno letisko LKTB
 -- sliac letisko LZSL
