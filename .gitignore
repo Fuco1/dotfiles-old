@@ -1,6 +1,7 @@
 .FBReader/*
 .FontForge/*
 .ICEauthority
+.Skype/
 .Xauthority
 .adobe/*
 .aptitude/*
@@ -42,6 +43,7 @@
 .config/pavucontrol.ini
 .config/pulse/*
 .config/qBittorrent/*
+.config/teamviewer9/
 .config/transmission/*
 .config/upstart/*
 .config/user-dirs.dirs
@@ -59,11 +61,13 @@
 .fehbg
 .fontconfig/*
 .gconf/*
+.gd/
 .getmail/*
 .ghc/*
 .gksu.lock
 .gnome2/*
-.gnupg/*
+.gnupg
+.gnuplot_history
 .gstreamer-0.10/*
 .gtkrc-2.0
 .gtkrc-xfce
@@ -109,6 +113,7 @@
 .tagsistant/*
 .texmf-var/*
 .thumbnails/*
+.thunderbird/
 .viminfo*
 .w3m/*
 .windows-serial
@@ -131,6 +136,7 @@ Calibre Library/*
 GNUstep/
 Maildir/*
 __sync/*
+backup/
 books.html
 dev/*
 download/*
