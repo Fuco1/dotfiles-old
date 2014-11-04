@@ -48,7 +48,7 @@ other_email=dota.keys@gmail.com;goljer@logio.cz
 #       in the mail store.
 #
 [new]
-tags=new;
+tags=new;unread;
 ignore=
 
 # Search configuration
