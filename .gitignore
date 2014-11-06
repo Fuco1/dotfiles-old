@@ -116,6 +116,7 @@
 .thunderbird/
 .viminfo*
 .w3m/*
+.whereami
 .windows-serial
 .wine/*
 .xmonad/*.hi
@@ -147,6 +148,7 @@ gmon.out
 installed-packages.txt
 languages/
 languages/*
+logio/
 ltxpng/*
 media/*
 mfput.log
