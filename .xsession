@@ -31,4 +31,7 @@ feh --bg-scale '/home/matus/media/pictures/haskell.png'
 
 bash /home/matus/.inputsetup
 sh "/home/matus/.screenlayout/$(cat /home/matus/.whereami).sh"
+
+bash /home/matus/bin/setup-tunnels
+
 exec /usr/bin/xmonad
