@@ -61,7 +61,7 @@ muteSinkInput =
 setVolume :: SinkInput -> X ()
 setVolume sink = do
   volume <- mkXPromptWithReturn
-              (PAPrompt "Volume")
+              (PAPrompt $ "Volume [" ++ name sink ++ "]")
               Constants.prompt
               (mkComplFunFromList $ map show [0..100])
               return
