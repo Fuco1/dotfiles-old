@@ -29,10 +29,7 @@ main = do
                    "brno" -> 0
                    "home" -> 1
                    _ -> 0
-       let aux = case w of
-                  "brno" -> 0
-                  "home" -> 1
-                  _ -> 1
+       let aux = 1 - main
        xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = C.manageHook
