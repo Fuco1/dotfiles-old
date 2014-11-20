@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Add org file changes to the repository
 
 where=$(cat ~/.whereami)
