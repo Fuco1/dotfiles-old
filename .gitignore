@@ -15,6 +15,7 @@
 .calibre_calibre GUI.lock
 .cask/
 .config/Pinta/
+.config/Skype/*
 .config/Thunar/*
 .config/Trolltech.conf
 .config/Undertype/fontmatrix.conf
@@ -23,12 +24,16 @@
 .config/chromium/*
 .config/dconf/*
 .config/enchant/*
+.config/evince/*
+.config/fish/*
 .config/fish/fish_history
 .config/fish/fishd.201a06ddd68a
 .config/fish/generated_completions/*
+.config/gmpc/*
 .config/google-googletalkplugin/*
 .config/gtk-2.0/*
 .config/gtk-3.0/*
+.config/hexchat/*
 .config/htop/htoprc
 .config/libreoffice/*
 .config/menus
@@ -43,6 +48,7 @@
 .config/pavucontrol.ini
 .config/pulse/*
 .config/qBittorrent/*
+.config/teamviewer10/*
 .config/teamviewer9/
 .config/transmission/*
 .config/upstart/*
