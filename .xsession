@@ -24,6 +24,8 @@ if [ ! -f ~/.mpd/pid ] ; then
 fi
 
 eval $(gpg-agent --daemon)
+ssh-agent
+ssh-add "/home/matus/.ssh/id_rsa"
 
 mountavfs
 tagsistant "/home/matus/files"
