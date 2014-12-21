@@ -35,16 +35,25 @@ interactive("switch-to-recent-buffer",
                             I.buffer))));
     });
 
-define_key(default_global_keymap, "C-m", "switch-to-recent-buffer");
+define_key(default_global_keymap, "C-'", "switch-to-recent-buffer");
+define_key(default_global_keymap, "M-k", "kill-current-buffer");
 
 /// keys
 define_key(content_buffer_normal_keymap, "v", "follow-new-buffer");
 define_key(content_buffer_normal_keymap, "V", "follow-new-buffer-background");
 
-define_key(content_buffer_normal_keymap, "M-k", "kill-current-buffer");
+define_key(content_buffer_normal_keymap, "o", "find-url-new-buffer");
+define_key(content_buffer_normal_keymap, "O", "find-url");
 
 define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown");
 define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp");
+
+define_key(content_buffer_normal_keymap, "J", "cmd_scrollPageDown");
+define_key(content_buffer_normal_keymap, "K", "cmd_scrollPageUp");
+
+undefine_key(content_buffer_normal_keymap, "g");
+define_key(content_buffer_normal_keymap, "g g", "cmd_scrollTop");
+define_key(content_buffer_normal_keymap, "G", "cmd_scrollBottom");
 
 /// DOM/element selections
 require("element.js");
