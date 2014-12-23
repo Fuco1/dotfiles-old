@@ -1,3 +1,4 @@
+import Data.Monoid (All(..))
 import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
 import System.Process (readProcess)
@@ -22,6 +23,20 @@ import StackSetExtra as WX
 import Workspaces
 import PulseAudio
 
+-- TODO: we might want to set urgency for the "to be focused" window in the future.
+-- TODO: test that the window sending the event is in fact the firefox
+-- window.  So far, this hasn't caused any trouble
+-- | This fixes the annoying issue where opening a link from an
+-- outside application focuses firefox.
+withoutNetActiveWindow :: XConfig a -> XConfig a
+withoutNetActiveWindow c = c { handleEventHook = \e -> do
+                                  p <- case e of
+                                        ClientMessageEvent { ev_message_type = mt } -> do
+                                          a_aw <- getAtom "_NET_ACTIVE_WINDOW"
+                                          return (mt /= a_aw)
+                                        otherwise -> return True
+                                  if p then handleEventHook c e else return (All True) }
+
 main = do
        xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
        w <- readFile "/home/matus/.whereami"
@@ -30,13 +45,16 @@ main = do
                    "home" -> 1
                    _ -> 0
        let aux = 1 - main
-       xmonad $ ewmh $ withUrgencyHook NoUrgencyHook defaultConfig
+       xmonad $
+         (\c -> c { startupHook = startupHook c >> setWMName "LG3D" }) $
+         withoutNetActiveWindow $
+         ewmh $
+         withUrgencyHook NoUrgencyHook defaultConfig
                 {
                   manageHook         = C.manageHook
                 , layoutHook         = C.layout
-                , startupHook        = ewmhDesktopsStartup >> setWMName "LG3D"
                 , logHook            = dynamicLogWithPP C.printer { ppOutput = hPutStrLn xmproc }
-                , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook <+> docksEventHook
+                , handleEventHook    = fullscreenEventHook <+> docksEventHook
                 , modMask            = mod4Mask
                 , borderWidth        = 1
                 , terminal           = "urxvtc"
