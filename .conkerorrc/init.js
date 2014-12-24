@@ -129,22 +129,23 @@ interactive("restore-killed-buffer-url", "Loads url from a previously killed buf
             });
 define_key(default_global_keymap, "C-T", "restore-killed-buffer-url");
 
-/// remember download file path
-{
-   let _save_path = get_home_directory();
+/// downloads
+remove_hook("download_added_hook", open_download_buffer_automatically);
 
-   function update_save_path (info) {
-       _save_path = info.target_file.parent.path;
-   }
+let my_download_path = get_home_directory() + "download";
 
-   add_hook("download_added_hook", update_save_path);
-
-   suggest_save_path_from_file_name = function (filename, buffer) {
-       let file = make_file(_save_path);
-       file.append(filename);
-       return file.path;
-   }
+function update_save_path (info) {
+    my_download_path = info.target_file.parent.path;
 }
+
+add_hook("download_added_hook", update_save_path);
+
+suggest_save_path_from_file_name = function (filename, buffer) {
+    let file = make_file(my_download_path);
+    file.append(filename);
+    return file.path;
+}
+
 
 /// webjumps
 define_opensearch_webjump("w", "wikipedia.xml");
