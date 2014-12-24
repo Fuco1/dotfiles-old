@@ -7,6 +7,7 @@ session_pref("signon.expireMasterPassword", false);
 session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
+require("hide-minibuffer.js");
 /// variables
 minibuffer_completion_rows = 20
 
