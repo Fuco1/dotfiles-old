@@ -14,7 +14,8 @@ require("favicon");
 read_buffer_show_icons = true;
 
 /// variables
-minibuffer_completion_rows = 20
+minibuffer_completion_rows = 20;
+
 function my_load_url_in_new_buffer(url, ctx) {
     create_buffer_in_current_window(
         buffer_creator(content_buffer,
