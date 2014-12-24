@@ -49,25 +49,23 @@ interactive("switch-to-recent-buffer",
                             I.buffer))));
     });
 
-define_key(default_global_keymap, "C-'", "switch-to-recent-buffer");
-define_key(default_global_keymap, "M-k", "kill-current-buffer");
-
 /// keys
-define_key(content_buffer_normal_keymap, "v", "follow-new-buffer");
-define_key(content_buffer_normal_keymap, "V", "follow-new-buffer-background");
+define_key(default_global_keymap, "C-'", "switch-to-recent-buffer");
 
-define_key(content_buffer_normal_keymap, "o", "find-url-new-buffer");
-define_key(content_buffer_normal_keymap, "O", "find-url");
+[content_buffer_normal_keymap, special_buffer_keymap].map(function(map) {
+    define_key(map, "j", "cmd_scrollLineDown");
+    define_key(map, "J", "cmd_scrollPageDown");
+    define_key(map, "k", "cmd_scrollLineUp");
+    define_key(map, "K", "cmd_scrollPageUp");
+    define_key(map, "u", "cmd_scrollTop");
+    define_key(map, "d", "cmd_scrollBottom");
+});
 
-define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown");
-define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp");
+define_key(content_buffer_normal_keymap, "v", "follow-new-buffer-background");
+define_key(content_buffer_normal_keymap, "V", "follow-new-buffer");
 
-define_key(content_buffer_normal_keymap, "J", "cmd_scrollPageDown");
-define_key(content_buffer_normal_keymap, "K", "cmd_scrollPageUp");
-
-undefine_key(content_buffer_normal_keymap, "g");
-define_key(content_buffer_normal_keymap, "g g", "cmd_scrollTop");
-define_key(content_buffer_normal_keymap, "G", "cmd_scrollBottom");
+define_key(content_buffer_normal_keymap, "g", "find-alternate-url-new-buffer");
+define_key(content_buffer_normal_keymap, "G", "find-alternate-url");
 
 /// DOM/element selections
 require("element.js");
