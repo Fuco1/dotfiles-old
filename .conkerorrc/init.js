@@ -8,6 +8,7 @@ session_pref("signon.SignonFileName", "signons.txt");
 Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
 require("hide-minibuffer.js");
+require("browse-history.js");
 /// variables
 minibuffer_completion_rows = 20
 
