@@ -9,6 +9,10 @@ Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager); // init
 
 require("hide-minibuffer.js");
 require("browse-history.js");
+
+require("favicon");
+read_buffer_show_icons = true;
+
 /// variables
 minibuffer_completion_rows = 20
 
