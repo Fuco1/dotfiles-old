@@ -70,7 +70,7 @@ define_key(content_buffer_normal_keymap, "G", "find-alternate-url");
 /// DOM/element selections
 require("element.js");
 define_browser_object_class("list",
-                            "Browser object class for selecting a list node via hinting.",
+                            "Browser object class for selecting a list node.",
                             xpath_browser_object_handler("//ul | //ol"),
                             $hint = "select (un)ordered list");
 
@@ -78,7 +78,7 @@ define_key(content_buffer_normal_keymap, "* l", "browser-object-list");
 
 /// helpers
 interactive("switch-to-other-buffer",
-            "Switch to the previously open buffer",
+            "Switch to the previously opened buffer",
             function (I) {
                 var blist = I.window.buffers.buffer_history;
                 if (blist.length > 1)
