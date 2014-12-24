@@ -151,6 +151,23 @@ define_key(default_global_keymap, "C-T", "revive-buffer");
 
 /// webjumps
 define_opensearch_webjump("w", "wikipedia.xml");
+define_opensearch_webjump("wg", "wikipedia-de.xml");
+define_opensearch_webjump("wi", "wikipedia-it.xml");
+define_opensearch_webjump("wcs", "wikipedia-cs.xml");
+define_opensearch_webjump("wl", "wikipedia-la.xml");
+define_opensearch_webjump("wr", "wikipedia-ru.xml");
 define_opensearch_webjump("wd", "wiktionary.xml");
-define_webjump("y", "http://www.youtube.com/results?search_query=%s&search=Search");
+define_opensearch_webjump("y", "youtube.xml");
+
 define_webjump("imdb", "http://www.imdb.com/find?q=%s");
+define_webjump("r", "http://reddit.com/r/%s");
+define_webjump("wa", "http://www.wolframalpha.com/input/?i=%s");
+define_webjump("gi", "http://www.google.com/images?q=%s");
+define_webjump("wf", "http://fallout.wikia.com/wiki/index.php?search=%s&fulltext=0");
+define_webjump("e", "http://www.etymonline.com/index.php?allowed_in_frame=0&search=%s&searchmode=none");
+define_webjump("tpb", "http://thepiratebay.se/s/?q=%s&page=0&orderby=99");
+define_webjump("juls", "http://slovnik.juls.savba.sk/?w=%s&s=exact&c=ia8c&d=kssj4&d=psp&ie=utf-8&oe=utf-8");
+define_webjump("l", "http://linguax.com/lexica/old.php?searchedLG=%s");
+define_webjump("ud", "http://www.urbandictionary.com/define.php?term=%s");
+define_webjump("lide", "https://is.muni.cz/auth/lide/?searchid=%s&Hledat=Hledat");
+define_webjump("df", "http://df.magmawiki.com/index.php?search=%s&go=Go");
