@@ -149,6 +149,7 @@ suggest_save_path_from_file_name = function (filename, buffer) {
 
 
 /// webjumps
+define_opensearch_webjump("g", "google.xml");
 define_opensearch_webjump("w", "wikipedia.xml");
 define_opensearch_webjump("wg", "wikipedia-de.xml");
 define_opensearch_webjump("wi", "wikipedia-it.xml");
