@@ -15,6 +15,14 @@ read_buffer_show_icons = true;
 
 /// variables
 minibuffer_completion_rows = 20
+function my_load_url_in_new_buffer(url, ctx) {
+    create_buffer_in_current_window(
+        buffer_creator(content_buffer,
+                       $opener = ctx,
+                       $load = url),
+        OPEN_NEW_BUFFER, false);
+}
+url_remoting_fn = my_load_url_in_new_buffer;
 
 /// modifiers
 modifiers.M = new modifier(
