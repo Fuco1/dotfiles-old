@@ -15,6 +15,8 @@ read_buffer_show_icons = true;
 
 /// variables
 minibuffer_completion_rows = 20;
+read_url_handler_list = [read_url_make_default_webjump_handler("g")];
+
 
 function my_load_url_in_new_buffer(url, ctx) {
     create_buffer_in_current_window(
