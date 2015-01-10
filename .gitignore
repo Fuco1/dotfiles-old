@@ -1,5 +1,6 @@
 .FBReader/*
 .FontForge/*
+.Fontmatrix/
 .ICEauthority
 .Skype/
 .Xauthority
@@ -66,6 +67,7 @@
 .emacs.d/*
 .fehbg
 .fontconfig/*
+.fonts.conf
 .gconf/*
 .gd/
 .getmail/*
@@ -109,6 +111,7 @@
 .pki/*
 .rnd
 .screenlayout/generated-by-arandr
+.signature-logio
 .slime/*
 .slocdata/*
 .sqlite_history
@@ -144,15 +147,18 @@ GNUstep/
 Maildir/*
 __sync/*
 backup/
+bart.zip
 bin/xulrunner
 books.html
 dev/*
+documents/
 download/*
 drill/*
 files/*
 games/*
 gmon.out
 installed-packages.txt
+java.zip
 languages/
 languages/*
 logio/
@@ -175,4 +181,5 @@ sources/*
 stuff/*
 test/
 texmf/*
+xcmenu_log
 xterm-colortest
