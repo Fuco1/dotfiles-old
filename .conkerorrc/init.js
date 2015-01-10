@@ -12,6 +12,16 @@ read_buffer_show_icons = true;
 minibuffer_completion_rows = 20;
 read_url_handler_list = [read_url_make_default_webjump_handler("g")];
 
+/// minibuffer
+// contribute upstream
+// TODO: take min minibuffer_completion_rows / current number of items (= go to the end/beginning)
+interactive("minibuffer-next-page", null,
+    function (I) { minibuffer_complete(I.window, minibuffer_completion_rows); });
+interactive("minibuffer-previous-page", null,
+    function (I) { minibuffer_complete(I.window, -minibuffer_completion_rows); });
+
+define_key(minibuffer_keymap, "C-v", "minibuffer-next-page");
+define_key(minibuffer_keymap, "M-v", "minibuffer-previous-page");
 
 function my_load_url_in_new_buffer(url, ctx) {
     create_buffer_in_current_window(
