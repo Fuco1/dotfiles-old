@@ -95,9 +95,11 @@ main = do
                 , ("<Print>" <%> "u" <%> "<Print>", spawn "/home/matus/bin/take-screenshot noupload")
                 , (leader <%> "<F1>" <%> "<F1>", spawn "xfce4-settings-manager")
                 , (leader <%> "<F1>" <%> "<F2>", spawn "xfce4-appfinder")
+                  -- create a submap for these
                 , (leader <%> "=" <%> "a", runInTermOrRaise "alsamixer" "0")
                 , (leader <%> "=" <%> "p", runInTermOrRaise "pacmixer" "0")
                 , (leader <%> "=" <%> "n", runInTermOrRaise "ncmpcpp" "0")
+                , (leader <%> "=" <%> "c", runInTermOrRaise "pavucontrol" "0")
                 , ("M2-<Backspace>", toggleWS)
                 , ("M2-S-<Pause>", io exitSuccess)
                 , ("M2-<Pause>", recompileXMonad)
