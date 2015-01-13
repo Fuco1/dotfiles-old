@@ -24,7 +24,7 @@ if [ ! -f ~/.mpd/pid ] ; then
 fi
 
 eval $(gpg-agent --daemon)
-ssh-agent
+eval $(ssh-agent -s)
 ssh-add "/home/matus/.ssh/id_rsa"
 
 mountavfs
