@@ -1,6 +1,7 @@
 import Data.Monoid (All(..))
 import System.Exit (exitSuccess)
 import System.IO (hPutStrLn)
+import System.IO.Strict as IOS (readFile)
 import System.Process (readProcess)
 import XMonad
 import XMonad.Actions.CycleWS (toggleWS)
@@ -38,13 +39,21 @@ withoutNetActiveWindow c = c { handleEventHook = \e -> do
                                   if p then handleEventHook c e else return (All True) }
 
 main = do
-       xmproc <- spawnPipe "/home/matus/.cabal/bin/xmobar -x 1 /home/matus/.xmonad/xmobarrc"
-       w <- readFile "/home/matus/.whereami"
-       let main = case w of
+       w <- IOS.readFile "/home/matus/.whereami"
+       let left = case w of
                    "brno" -> 0
                    "home" -> 1
+                   "logio" -> 1
                    _ -> 0
-       let aux = 1 - main
+       let right = case left of
+                    (S 0) -> 1
+                    (S 1) -> 0
+       let (S xmobarScreen) = case w of
+                         "brno" -> right
+                         "home" -> left
+                         "logio" -> right
+                         _ -> left
+       xmproc <- spawnPipe $ "/home/matus/.cabal/bin/xmobar -x " ++ show xmobarScreen ++ " /home/matus/.xmonad/xmobarrc"
        xmonad $
          (\c -> c { startupHook = startupHook c >> setWMName "LG3D" }) $
          withoutNetActiveWindow $
@@ -106,10 +115,10 @@ main = do
                 , ("M2-p", runOrRaisePrompt C.prompt)
                 , (leader <%> leader, windowPromptGoto C.prompt)
                 , ("M2-c", kill)
-                , ("M2-,", withScreen main W.view)
-                , ("M2-.", withScreen aux W.view)
-                , ("M2-S-,", withScreen main W.shift)
-                , ("M2-S-.", withScreen aux W.shift)
+                , ("M2-,", withScreen left W.view)
+                , ("M2-.", withScreen right W.view)
+                , ("M2-S-,", withScreen left W.shift)
+                , ("M2-S-.", withScreen right W.shift)
                 , ("M2-/", windows WX.shiftToOtherScreen)
                 , ("M4-p", windows W.focusDown)
                 , ("M4-n", windows W.focusUp)
