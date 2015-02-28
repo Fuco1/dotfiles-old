@@ -82,6 +82,12 @@ define_browser_object_class("list",
                             xpath_browser_object_handler("//ul | //ol"),
                             $hint = "select (un)ordered list");
 
+// how to make default choice of object for a command.
+// interactive("follow-yc-links",
+//             "follow the news link on yc",
+//             "follow",
+//             $browser_object = browser_object_yc_links);
+
 define_key(content_buffer_normal_keymap, "* l", "browser-object-list");
 
 /// helpers
