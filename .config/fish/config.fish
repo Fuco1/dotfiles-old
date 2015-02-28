@@ -55,6 +55,8 @@ alias acs "sudo apt-cache search"
 alias ta "tmux attach"
 alias grep "pcregrep --color=auto"
 alias yd "youtube-dl"
+alias vlca "vlc --vout none"
+alias cvlca "cvlc --vout none"
 
 # bindings
 function fish_user_key_bindings
