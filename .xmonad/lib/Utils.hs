@@ -46,7 +46,7 @@ infixr 6 <%>
 
 notifySend :: Int -> String -> String -> IO ()
 notifySend timeout title msg =
-  void $ readProcess "notify-send" ["-u", "low", "-t", show (timeout * 1000), title, msg] ""
+  void $ readProcess "notify-send" ["-u", "critical", "-t", show (timeout * 1000), title, msg] ""
 
 runInTermOrRaise :: String -> WorkspaceId -> X ()
 runInTermOrRaise prog ws = raiseMaybe (runInTerm ("-name " ++ prog) prog >> windows (W.greedyView ws)) (resource =? prog)
