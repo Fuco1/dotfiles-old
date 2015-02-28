@@ -4,6 +4,8 @@ set -x EDITOR "emacsclient -nw"
 set -x VISUAL "/home/matus/bin/ecedit"
 set -x XDG_CONFIG_HOME "/home/matus/.config"
 set -x TEXMFHOME "/home/matus/texmf"
+set -x TEXMFVAR "/home/matus/.texmf-var"
+set -x TEXMFCONFIG "/home/matus/.texmf-config"
 set -x GPG_TTY (tty)
 set -x MAIL "$HOME/Maildir"
 # to unconfuse AWT about Xmonad
