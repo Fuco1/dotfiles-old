@@ -9,6 +9,10 @@ module Workspaces
 import XMonad
 import XMonad.Util.WorkspaceCompare (getWsCompare, mkWsSort, WorkspaceCompare, WorkspaceSort)
 
+import Data.List (elemIndex)
+import Data.Maybe (fromJust)
+import Data.Ord (comparing)
+
 import qualified XMonad.StackSet as W
 import qualified XMonad.Util.ExtensibleState as XS
 import qualified StackSetExtra   as WX
@@ -31,11 +35,18 @@ getMyCompare :: X WorkspaceCompare
 getMyCompare = do
     w <- gets windowset
     wsCompare <- getWsCompare
+    ScreenOrder screens <- (XS.get :: X ScreenOrder)
     return $ \a b -> case (WX.isOnScreen a w, WX.isOnScreen b w) of
-        (True, True)   -> WX.cmpByScreenId w a b
+        (True, True)   -> compareScreen screens (WX.onScreen w) a b
         (False, False) -> wsCompare a b
         (True, False)  -> LT
         (False, True)  -> GT
+  where
+    compareScreen
+      screens -- | Real physical screen order, this is determined on loading
+      vsi -- | Visible screens IDs
+      = comparing
+      (\x -> fromJust . elemIndex (WX.wsTagToScreenId vsi x) $ screens)
 
 -- | Sort workspaces by visibility, screenid and workspace index.
 getSortByMyCompare :: X WorkspaceSort

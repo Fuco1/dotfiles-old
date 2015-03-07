@@ -30,7 +30,10 @@ onScreen = liftM2 (:) W.current W.visible
 isOnScreen a w  = a `elem` map currentTag (onScreen w)
 
 -- | Convert workspace tag to screen id.
-wsTagToScreenId s x = W.screen $ fromJust $ find ((== x) . currentTag) s
+wsTagToScreenId
+  s -- | List of visible screens
+  x -- | Workspace tag
+  = W.screen $ fromJust $ find ((== x) . currentTag) s
 
 -- | Compare two workspaces by their screen id
 cmpByScreenId st = comparing (wsTagToScreenId $ onScreen st)
