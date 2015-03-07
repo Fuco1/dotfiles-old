@@ -141,7 +141,7 @@ main = do
                   , ((shiftMask .|. mod2Mask),   W.shift)
                   , ((shiftMask .|. mod4Mask),   W.shift)
                   , ((controlMask .|. mod2Mask), WX.shiftAndGreedyView)
-                  , ((mod4Mask .|. mod2Mask),    WX.shiftAndViewAtOther)
+                  , ((mod4Mask .|. mod2Mask),    WX.shiftAndView)
                   ]
                   >>= (uncurry C.withWorkspacesD)
                 )
