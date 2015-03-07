@@ -107,6 +107,7 @@
 .opera/*
 .opera_mail/*
 .opera_temp/*
+.org-timestamps/
 .pip/*
 .pki/*
 .rnd
@@ -117,6 +118,9 @@
 .sqlite_history
 .ssh/*
 .ssr/*
+.steam/
+.steampath
+.steampid
 .subversion/*
 .swipl-dir-history/
 .tagsistant/*
@@ -166,6 +170,7 @@ ltxpng/*
 media/*
 mfput.log
 mnsymbol/*
+nashe.txt
 org/*
 passwords.txt
 pictures/*
