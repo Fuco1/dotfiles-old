@@ -6,6 +6,7 @@ module StackSetExtra
        , cmpByScreenId
        , withScreen
        , withOtherScreen
+       , shiftAndView
        , shiftAndGreedyView
        , shiftAndViewAtOther
        , shiftToOtherScreen
@@ -49,6 +50,11 @@ withOtherScreen f st = case W.visible st of
   []      -> st
   [other] -> let ws = currentTag $ other in f ws st
   _       -> st
+
+-- | Shift the current active window to specified workspace, then select it on
+-- the other screen.
+shiftAndView :: WorkspaceId -> WindowSet -> WindowSet
+shiftAndView = liftM2 (.) W.view W.shift
 
 -- | Shift the current active window to specified workspace, then select it on
 -- the current screen.
