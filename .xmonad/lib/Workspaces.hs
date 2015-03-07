@@ -1,14 +1,21 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 module Workspaces
        ( withWorkspaces
        , getMyCompare
        , getSortByMyCompare
+       , ScreenOrder(..)
        ) where
 
 import XMonad
 import XMonad.Util.WorkspaceCompare (getWsCompare, mkWsSort, WorkspaceCompare, WorkspaceSort)
 
 import qualified XMonad.StackSet as W
+import qualified XMonad.Util.ExtensibleState as XS
 import qualified StackSetExtra   as WX
+
+data ScreenOrder = ScreenOrder [ScreenId] deriving Typeable
+instance ExtensionClass ScreenOrder where
+  initialValue = ScreenOrder [2,0,1]
 
 -- | Map a function under keys to workspaces
 withWorkspaces :: [WorkspaceId] -- ^ List of workspaces.

@@ -1,5 +1,8 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
-module Constants where
+module Constants
+       ( module Constants
+       , Workspaces.ScreenOrder -- tento reexport je prasarna
+       ) where
 
 import XMonad
 import XMonad.Actions.CopyWindow (copyToAll)
