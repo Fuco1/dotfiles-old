@@ -6,7 +6,7 @@ module StackSetExtra
        , cmpByScreenId
        , withScreen
        , withOtherScreen
-       , shiftAndView
+       , shiftAndGreedyView
        , shiftAndViewAtOther
        , shiftToOtherScreen
        ) where
@@ -52,8 +52,8 @@ withOtherScreen f st = case W.visible st of
 
 -- | Shift the current active window to specified workspace, then select it on
 -- the current screen.
-shiftAndView :: WorkspaceId -> WindowSet -> WindowSet
-shiftAndView = liftM2 (.) W.greedyView W.shift
+shiftAndGreedyView :: WorkspaceId -> WindowSet -> WindowSet
+shiftAndGreedyView = liftM2 (.) W.greedyView W.shift
 
 -- For those wondering, liftM2 (.) f g = \x -> f x . g x
 

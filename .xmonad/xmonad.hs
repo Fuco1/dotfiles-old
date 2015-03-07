@@ -40,19 +40,16 @@ withoutNetActiveWindow c = c { handleEventHook = \e -> do
 
 main = do
        w <- IOS.readFile "/home/matus/.whereami"
-       let left = case w of
-                   "brno" -> 0
-                   "home" -> 1
-                   "logio" -> 1
-                   _ -> 0
-       let right = case left of
-                    (S 0) -> 1
-                    (S 1) -> 0
+       let (left, middle, right) = case w of
+                   "brno" -> (2,0,1)
+                   "home" -> (2,1,0)
+                   "logio" -> (2,0,1)
+                   _ -> (2,0,1)
        let (S xmobarScreen) = case w of
                          "brno" -> right
                          "home" -> left
-                         "logio" -> right
-                         _ -> left
+                         "logio" -> middle
+                         _ -> middle
        xmproc <- spawnPipe $ "/home/matus/.cabal/bin/xmobar -x " ++ show xmobarScreen ++ " /home/matus/.xmonad/xmobarrc"
        xmonad $
          (\c -> c { startupHook = startupHook c >> setWMName "LG3D" }) $
@@ -115,9 +112,14 @@ main = do
                 , ("M2-p", runOrRaisePrompt C.prompt)
                 , (leader <%> leader, windowPromptGoto C.prompt)
                 , ("M2-c", kill)
-                , ("M2-,", withScreen left W.view)
+                , ("M2-m", withScreen left W.view)
+                , ("M2-,", withScreen middle W.view)
                 , ("M2-.", withScreen right W.view)
-                , ("M2-S-,", withScreen left W.shift)
+                , ("M2-C-m", withScreen left WX.shiftAndGreedyView)
+                , ("M2-C-,", withScreen middle WX.shiftAndGreedyView)
+                , ("M2-C-.", withScreen right WX.shiftAndGreedyView)
+                , ("M2-S-m", withScreen left W.shift)
+                , ("M2-S-,", withScreen middle W.shift)
                 , ("M2-S-.", withScreen right W.shift)
                 , ("M2-/", windows WX.shiftToOtherScreen)
                 , ("M4-p", windows W.focusDown)
@@ -135,7 +137,7 @@ main = do
                   , (mod4Mask,                   W.greedyView)
                   , ((shiftMask .|. mod2Mask),   W.shift)
                   , ((shiftMask .|. mod4Mask),   W.shift)
-                  , ((controlMask .|. mod2Mask), WX.shiftAndView)
+                  , ((controlMask .|. mod2Mask), WX.shiftAndGreedyView)
                   , ((mod4Mask .|. mod2Mask),    WX.shiftAndViewAtOther)
                   ]
                   >>= (uncurry C.withWorkspacesD)
