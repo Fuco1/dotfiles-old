@@ -14,6 +14,7 @@ import XMonad.Hooks.UrgencyHook (withUrgencyHook, NoUrgencyHook (..))
 import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
 import XMonad.Prompt.Window (windowPromptGoto)
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
+import XMonad.Util.ExtensibleState as XS
 import XMonad.Util.Run (spawnPipe, runInTerm)
 import qualified XMonad.StackSet as W
 
