@@ -52,7 +52,10 @@ main = do
                          _ -> middle
        xmproc <- spawnPipe $ "/home/matus/.cabal/bin/xmobar -x " ++ show xmobarScreen ++ " /home/matus/.xmonad/xmobarrc"
        xmonad $
-         (\c -> c { startupHook = startupHook c >> setWMName "LG3D" }) $
+         (\c -> c { startupHook = do
+                       XS.put (Workspaces.ScreenOrder [left, middle, right])
+                       startupHook c
+                       setWMName "LG3D" }) $
          withoutNetActiveWindow $
          ewmh $
          withUrgencyHook NoUrgencyHook defaultConfig
