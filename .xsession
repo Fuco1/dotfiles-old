@@ -23,7 +23,7 @@ if [ ! -f ~/.mpd/pid ] ; then
     mpd
 fi
 
-eval $(gpg-agent --daemon)
+eval $(gpg-agent)
 eval $(ssh-agent -s)
 ssh-add "/home/matus/.ssh/id_rsa"
 
