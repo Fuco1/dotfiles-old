@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-exec firefox --app ~/sources/conkeror/application.ini "$@"
+if [ -d "~/sources/conkeror" ]; then
+    exec firefox --app ~/sources/conkeror/application.ini "$@"
+else
+    # fallback to opera if conkeror is not found
+    exec opera "$@"
+fi
