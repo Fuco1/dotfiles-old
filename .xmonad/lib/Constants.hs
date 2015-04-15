@@ -16,6 +16,8 @@ import XMonad.Layout.ResizeScreen
 import XMonad.Prompt
 import XMonad.Util.Loggers
 
+import qualified XMonad.StackSet as W
+
 import Utils
 import Workspaces
 
@@ -64,10 +66,16 @@ printer = defaultPP { ppCurrent         = xmobarColor "#fcaf3e" ""
                     , ppSort            = getSortByMyCompare
                     }
 
-manageHook = (composeOne . concat $
-    [ [ isDialog -?> doFloat
+doKillWindow :: ManageHook
+doKillWindow = ask >>= \w -> liftX (killWindow w) >> doF (W.delete w)
+
+manageHook = (composeOne . concat $ --  <&&> resource =? "TeamViewer.exe"
+    [ [ (stringProperty "WM_NAME" =? "Computers & Contacts" <&&> resource =? "TeamViewer.exe") -?> doKillWindow
+      , isDialog -?> doFloat
       , transience
-      , isFullscreen -?> doFullFloat ]
+      , isFullscreen -?> doFullFloat
+      , resource =? "TeamViewer.exe" -?> doCenterFloat
+      ]
     , [ className =? c -?> doFloat | c <- myCFloats ]
     , [ title     =? t -?> doFloat | t <- myTFloats ]
     , [ resource  =? r -?> doFloat | r <- myRFloats ]
