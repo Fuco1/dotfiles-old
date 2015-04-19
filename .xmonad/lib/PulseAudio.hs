@@ -21,6 +21,7 @@ instance XPrompt PAPrompt where
 
 data SinkInput = SinkInput { index :: Int
                            , name :: String
+                           , vol :: Int
                            , muted :: Bool } deriving (Show)
 
 data MuteCmd = Mute | Unmute | Toggle deriving (Show, Eq)
@@ -60,7 +61,7 @@ muteSinkInput =
 setVolume :: SinkInput -> X ()
 setVolume sink = do
   volume <- mkXPromptWithReturn
-              (PAPrompt $ "Volume [" ++ name sink ++ "]")
+              (PAPrompt $ "Volume [" ++ name sink ++ ", " ++ show (vol sink) ++ "%]")
               Constants.prompt
               (mkComplFunFromList $ map show [0..100])
               return
@@ -108,15 +109,22 @@ yesno :: Parser Bool
 yesno = (string "yes" >> return True) <|>
         (string "no" >> return False)
 
+volume :: Parser Int
+volume = do
+  many (char ' ')
+  number
+
 sink :: Parser SinkInput
 sink = do
   manyTill anyChar (try (string "index: "))
   index <- number
+  manyTill anyChar (try (string "volume: 0:"))
+  vol <- volume
   manyTill anyChar (try (string "muted: "))
   muted <- yesno
   manyTill anyChar (try (string "application.name = \""))
   name <- try alsaPluginName <|> manyTill anyChar (try (char '"'))
-  return $ SinkInput index name muted
+  return $ SinkInput index name vol muted
 
 alsaPluginName :: Parser String
 alsaPluginName = do
