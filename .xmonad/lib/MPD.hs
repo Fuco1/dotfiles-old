@@ -17,7 +17,7 @@ module MPD
 import Control.Applicative ((<$>))
 import Control.Arrow ((&&&))
 import Control.Monad (when, void, mapM_, (<=<), (>=>), ap, liftM)
-import Control.Monad.Trans (liftIO, lift)
+import Control.Monad.Trans (lift)
 import Data.Function (on)
 import Data.List (elemIndex, isInfixOf, groupBy, nubBy)
 import Data.Maybe (fromJust, isJust)

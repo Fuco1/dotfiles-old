@@ -3,7 +3,6 @@ module PulseAudio
        , setVolumeSinkInput
        ) where
 
-import Control.Monad.Trans (liftIO)
 import Data.List (find)
 import System.Process (readProcess)
 import Text.Parsec
