@@ -68,9 +68,11 @@ playGeneric getter prompt mpd action = do
 playDirectory :: Action -> X ()
 playDirectory action = do
   Just dir <- listDirectorySongs ""
+  Just recursive <- mkXPromptWithReturn (MPDPrompt "Recursive? ") Constants.prompt (mkComplFunFromList' ["recursive", "non-recursive"]) return
+  let r = recursive == "recursive" || recursive == ""
   liftMPD_ $ do
     when (action == Clear) M.clear
-    songs <- getSongs dir
+    songs <- getSongs r dir
     addMany "" songs
     when (action == Clear) $ play Nothing
 
@@ -130,7 +132,7 @@ askPrompt name choices =
 
 listDirectorySongs :: String -> X (Maybe String)
 listDirectorySongs path = do
-  d <- liftMPD $ liftM (map (\x -> getFileName . toString $ x)) . getDirectories $ path
+  d <- liftMPD $ liftM (map (getFileName . toString)) . getDirectories $ path
   case d of
     Left _     -> return . Just $ path
     Right []   -> return . Just $ path
@@ -149,9 +151,10 @@ getDirectories = liftM getDirsFromResults . lsInfo . fromString
 getPlaylists :: MPD [PlaylistName]
 getPlaylists = liftM getPlaylistsFromResults . lsInfo . fromString $ ""
 
-getSongs :: String -> MPD [Path]
-getSongs path = do
-  songs <- liftM getSongsFromResults . lsInfo . fromString $ path
+getSongs :: Bool -> String -> MPD [Path]
+getSongs recursive path = do
+  let listFn = if recursive then listAllInfo else lsInfo
+  songs <- liftM getSongsFromResults . listFn . fromString $ path
   return [x | Song {sgFilePath = x} <- songs]
 
 ---------------------------------------- projections from results
