@@ -35,5 +35,7 @@ bash /home/matus/.inputsetup
 sh "/home/matus/.screenlayout/$(cat /home/matus/.whereami).sh"
 
 bash /home/matus/bin/setup-tunnels
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 17 --transparent true --alpha 0 --tint 0x000000 --margin -5 --widthtype request &
+nm-applet &
 
 exec /usr/bin/xmonad
