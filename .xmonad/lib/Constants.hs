@@ -75,6 +75,7 @@ manageHook = (composeOne . concat $ --  <&&> resource =? "TeamViewer.exe"
       , transience
       , isFullscreen -?> doFullFloat
       , resource =? "TeamViewer.exe" -?> doCenterFloat
+      , resource =? "arandr" -?> doCenterFloat
       ]
     , [ className =? c -?> doFloat | c <- myCFloats ]
     , [ title     =? t -?> doFloat | t <- myTFloats ]
