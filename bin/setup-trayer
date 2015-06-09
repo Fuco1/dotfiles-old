@@ -1,3 +1,3 @@
 #!/bin/bash
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 17 --transparent true --alpha 0 --tint 0x000000 --margin -5 --widthtype request --monitor 1 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut false --expand true --height 17 --transparent true --alpha 0 --tint 0x000000 --margin -5 --widthtype request --monitor 1 &
 nm-applet &
