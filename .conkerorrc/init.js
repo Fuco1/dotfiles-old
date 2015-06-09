@@ -2,7 +2,6 @@
 require("session.js");
 session_auto_save_auto_load = true;
 
-require("hide-minibuffer.js");
 require("browse-history.js");
 
 require("favicon");
