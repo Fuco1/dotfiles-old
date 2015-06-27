@@ -8,3 +8,6 @@ export XDG_CONFIG_HOME=/home/matus/.config
 export SHELL="/usr/bin/zsh"
 #export TERM="rxvt-unicode-256color"
 export TEXMFHOME="/home/matus/texmf"
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS="@im=ibus"
