@@ -74,4 +74,4 @@ shiftAndViewAtOther wid = withOtherScreen (\ows -> W.view wid . W.view ows . W.s
 -- | Shift the current active window to the workspace active on the other screen
 -- and select it immediately.
 shiftToOtherScreen :: WindowSet -> WindowSet
-shiftToOtherScreen = withOtherScreen $ liftM2 (.) W.view W.shift
+shiftToOtherScreen = withOtherScreen shiftAndView
