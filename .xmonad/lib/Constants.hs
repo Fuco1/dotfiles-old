@@ -84,7 +84,7 @@ manageHook = (composeOne . concat $ --  <&&> resource =? "TeamViewer.exe"
     , [ title     =? t -?> doIgnore | t <- myTIgnores ]
     , [ resource  =? r -?> doIgnore | r <- myRIgnores ]
     , [ resource  =? r -?> doShift "0" | r <- ["alsamixer", "pacmixer", "ncmpcpp"]]
-    , [ className =? "Xfce4-notifyd" -?> doIgnore <+> doF copyToAll ]
+    , [ className =? "Xfce4-notifyd" -?> doIgnore ]
     ])
     <+> manageDocks
     <+> XMonad.manageHook defaultConfig
