@@ -4,9 +4,7 @@ module PulseAudio
        ) where
 
 import Data.List (find)
-import System.Process (readProcess)
 import Text.Parsec
-import Text.Parsec.Char
 import Text.Parsec.String (Parser)
 import XMonad
 import XMonad.Prompt
