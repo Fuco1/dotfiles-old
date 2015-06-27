@@ -3,7 +3,8 @@ module PulseAudio
        , setVolumeSinkInput
        ) where
 
-import Data.List (find)
+import Data.List (find, sortBy)
+import Data.Function (on)
 import Text.Parsec
 import Text.Parsec.String (Parser)
 import XMonad
@@ -32,10 +33,11 @@ withSinks prompt action = do
     Right [] -> liftIO $ notifySend 5 "Error" $ "No sinks available."
     Right [s] -> action s
     Right sinks -> do
-      pick <- sinkPicker sinks prompt
+      let sinks' = sortBy (compare `on` muted) sinks
+      pick <- sinkPicker sinks' prompt
       let sink = case pick of
-                   Just "" -> Just $ head sinks
-                   Just x -> find ((==) x . name) sinks
+                   Just "" -> Just $ head sinks'
+                   Just x -> find ((==) x . name) sinks'
                    Nothing -> Nothing
       case sink of
         Just s -> action s
