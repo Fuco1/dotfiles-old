@@ -29,7 +29,7 @@ function upload_image() {
     echo "image  link: $img_url"
     echo "delete link: $del_url"
 
-    echo "$img_url" | xclip -selection clipboard
+    echo -n "$img_url" | xclip -selection clipboard
     echo "URL copied to clipboard"
 
     notify ok "Imgur: Upload done!" "$img_url"
