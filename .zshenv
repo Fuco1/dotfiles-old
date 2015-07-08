@@ -1,5 +1,5 @@
 typeset -U path
-path=(~/.cabal/bin ~/.cask/bin ~/bin $path)
+path=(~/.rvm/bin ~/.cabal/bin ~/.cask/bin ~/bin $path)
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 export EDITOR="emacs -nw"
