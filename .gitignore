@@ -35,7 +35,6 @@
 .config/gtk-2.0/*
 .config/gtk-3.0/*
 .config/hexchat/*
-.config/htop/htoprc
 .config/libreoffice/*
 .config/menus
 .config/mono.addins/
